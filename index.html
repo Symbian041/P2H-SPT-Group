@@ -82,7 +82,9 @@
         .submit-btn {
             background: var(--accent-yellow); color: #0f172a; font-weight: 800; width: 100%;
             padding: 12px; border: none; border-radius: 8px; font-size: 0.95rem; cursor: pointer;
+            transition: all 0.2s ease;
         }
+        .submit-btn:disabled { background: var(--na-gray); cursor: not-allowed; }
         canvas { background: #0f172a; border: 1px dashed var(--border-color); border-radius: 6px; width: 100%; height: 90px; }
     </style>
 </head>
@@ -91,7 +93,7 @@
     <header>
         <div class="brand">
             <h1>P2H MOBILE — PT. SKU</h1>
-            <p>Database Sheet Standardized</p>
+            <p>Database Online Google Sheets</p>
         </div>
         <a href="https://docs.google.com/spreadsheets/d/1CNmykNC0Kz--XKmRL3iZ5yKfcKSkhZ0j4NJlWeTEkB8/edit?usp=drive_link" target="_blank" class="sheet-btn">
             <i class="fa-solid fa-file-excel"></i> Sheet P2H
@@ -152,7 +154,7 @@
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-triangle-exclamation"></i> Critical Safety Items (Stop-No-Go)</div>
             
-            <div class="item-row" data-key="rem">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">Rem Utama & Handbrake</span><span class="badge-crit">CRITICAL</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'rem', 'BAIK')">BAIK</div>
@@ -161,7 +163,7 @@
                 </div>
             </div>
 
-            <div class="item-row" data-key="kemudi">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">Kemudi & Steering System</span><span class="badge-crit">CRITICAL</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'kemudi', 'BAIK')">BAIK</div>
@@ -170,7 +172,7 @@
                 </div>
             </div>
 
-            <div class="item-row" data-key="rotator">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">Lampu Rotator & Buggy Whip</span><span class="badge-crit">CRITICAL</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'rotator', 'BAIK')">BAIK</div>
@@ -179,7 +181,7 @@
                 </div>
             </div>
 
-            <div class="item-row" data-key="radio">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">Radio Komunikasi 2-Way</span><span class="badge-crit">CRITICAL</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'radio', 'BAIK')">BAIK</div>
@@ -188,7 +190,7 @@
                 </div>
             </div>
 
-            <div class="item-row" data-key="apar">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">APAR</span><span class="badge-crit">CRITICAL</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'apar', 'BAIK')">BAIK</div>
@@ -197,7 +199,7 @@
                 </div>
             </div>
 
-            <div class="item-row" data-key="seatbelt">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">Seatbelt / Sabuk Pengaman</span><span class="badge-crit">CRITICAL</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'seatbelt', 'BAIK')">BAIK</div>
@@ -211,7 +213,7 @@
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-wrench"></i> Pemeriksaan Fisik & Mekanis Umum</div>
 
-            <div class="item-row" data-key="ban">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">Ban & Mur Roda (Chassis)</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'ban', 'BAIK')">BAIK</div>
@@ -220,7 +222,7 @@
                 </div>
             </div>
 
-            <div class="item-row" data-key="lampu">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">Lampu Utama, Sein & Mundur</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'lampu', 'BAIK')">BAIK</div>
@@ -229,7 +231,7 @@
                 </div>
             </div>
 
-            <div class="item-row" data-key="spion">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">Spion & Wiper Window</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'spion', 'BAIK')">BAIK</div>
@@ -238,7 +240,7 @@
                 </div>
             </div>
 
-            <div class="item-row" data-key="klakson">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">Klakson & Alarm Mundur</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'klakson', 'BAIK')">BAIK</div>
@@ -247,7 +249,7 @@
                 </div>
             </div>
 
-            <div class="item-row" data-key="oliRadiator">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">Level Oli & Air Radiator</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'oliRadiator', 'BAIK')">BAIK</div>
@@ -256,7 +258,7 @@
                 </div>
             </div>
 
-            <div class="item-row" data-key="minyakRem">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">Level Minyak Rem & Power Steering</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'minyakRem', 'BAIK')">BAIK</div>
@@ -265,7 +267,7 @@
                 </div>
             </div>
 
-            <div class="item-row" data-key="kebocoran">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">Kebocoran Fluid (Oli/Hydraulic)</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'kebocoran', 'BAIK')">BAIK</div>
@@ -274,7 +276,7 @@
                 </div>
             </div>
 
-            <div class="item-row" data-key="bodyChassis">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">Body & Chassis Damage</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'bodyChassis', 'BAIK')">BAIK</div>
@@ -283,7 +285,7 @@
                 </div>
             </div>
 
-            <div class="item-row" data-key="p3k">
+            <div class="item-row">
                 <div class="item-info"><span class="item-name">Kotak P3K & Segitiga Pengaman</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'p3k', 'BAIK')">BAIK</div>
@@ -321,7 +323,7 @@
             <button style="background:transparent; border:none; color:var(--text-muted); font-size:0.75rem; margin-top:4px; cursor:pointer;" onclick="clearCanvas()">Clear Signature</button>
         </div>
 
-        <button class="submit-btn" onclick="submitForm()"><i class="fa-solid fa-paper-plane"></i> Kirim Laporan ke Google Sheet</button>
+        <button id="submitBtn" class="submit-btn" onclick="submitForm()"><i class="fa-solid fa-paper-plane"></i> Kirim Laporan ke Google Sheet</button>
     </div>
 
     <!-- Bottom Nav -->
@@ -333,7 +335,9 @@
     </div>
 
     <script>
-        // Store status item checks
+        // Endpoint Google Apps Script yang telah diisi
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzm3ceTfJKOPaHBW11pnbBnbc6FyER8oIGxsygK5lKFjj0o31YIclrak2QT2i8lMzFIRg/exec";
+
         const checks = {
             rem: 'BAIK', kemudi: 'BAIK', rotator: 'BAIK', radio: 'BAIK', apar: 'BAIK', seatbelt: 'BAIK',
             ban: 'BAIK', lampu: 'BAIK', spion: 'BAIK', klakson: 'BAIK', oliRadiator: 'BAIK',
@@ -342,7 +346,7 @@
 
         const criticalKeys = ['rem', 'kemudi', 'rotator', 'radio', 'apar', 'seatbelt'];
 
-        // Set default datetime to local current time
+        // Default Waktu Sekarang
         document.getElementById('opDateTime').value = new Date().toISOString().slice(0, 16);
 
         function setCheck(element, key, val) {
@@ -382,7 +386,7 @@
             }
         }
 
-        // Signature Canvas Handler
+        // Canvas Tanda Tangan
         const canvas = document.getElementById('sigCanvas');
         const ctx = canvas.getContext('2d');
         let drawing = false;
@@ -417,6 +421,7 @@
 
         function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
 
+        // Pengiriman Data ke Google Sheet via Apps Script
         function submitForm() {
             const unitCode = document.getElementById('unitCode').value;
             const driverName = document.getElementById('driverName').value;
@@ -427,10 +432,13 @@
             }
 
             const currentStatus = evaluateFeasibility();
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // Indikasi Loading
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengirim Laporan...`;
+            submitBtn.disabled = true;
 
-            // Structure data matching Column A - AC (29 Columns)
             const payload = {
-                timestamp: new Date().toLocaleString('id-ID'),
                 opDateTime: document.getElementById('opDateTime').value.replace('T', ' '),
                 shift: document.getElementById('shift').value,
                 unitCode: unitCode,
@@ -439,14 +447,12 @@
                 badgeNo: document.getElementById('badgeNo').value,
                 locationPit: document.getElementById('locationPit').value,
                 hmStart: document.getElementById('hmStart').value,
-                // Critical Items
                 rem: checks.rem,
                 kemudi: checks.kemudi,
                 rotator: checks.rotator,
                 radio: checks.radio,
                 apar: checks.apar,
                 seatbelt: checks.seatbelt,
-                // Mechanical Items
                 ban: checks.ban,
                 lampu: checks.lampu,
                 spion: checks.spion,
@@ -456,7 +462,6 @@
                 kebocoran: checks.kebocoran,
                 bodyChassis: checks.bodyChassis,
                 p3k: checks.p3k,
-                // Status & Verification
                 statusKelayakan: currentStatus,
                 remarks: document.getElementById('remarks').value,
                 signature: 'Ttd: ' + driverName,
@@ -464,8 +469,23 @@
                 supervisorApproval: document.getElementById('supervisorApproval').value
             };
 
-            console.log('Payload Data P2H 29 Kolom:', payload);
-            alert(`Laporan P2H Unit ${unitCode} berhasil disimpan!\nStatus Kelayakan: ${currentStatus}`);
+            fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                alert(`Laporan P2H Unit ${unitCode} BERHASIL TERKIRIM ke Google Sheet!\nStatus: ${currentStatus}`);
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Kirim Laporan ke Google Sheet`;
+                submitBtn.disabled = false;
+            })
+            .catch(error => {
+                alert("Gagal mengirim data. Pastikan koneksi internet terhubung.");
+                console.error('Error:', error);
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Kirim Laporan ke Google Sheet`;
+                submitBtn.disabled = false;
+            });
         }
     </script>
 </body>
