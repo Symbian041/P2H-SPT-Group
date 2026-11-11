@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>P2H Operasional Tambang - PT. SKU</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -19,54 +19,55 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); padding-bottom: 80px; }
+        html, body { width: 100%; overflow-x: hidden; background-color: var(--bg-color); color: var(--text-main); padding-bottom: 80px; }
 
         header {
             background: linear-gradient(135deg, #1e293b, #0f172a);
-            padding: 1rem; border-bottom: 2px solid var(--accent-yellow);
+            padding: 0.85rem 1rem; border-bottom: 2px solid var(--accent-yellow);
             position: sticky; top: 0; z-index: 100;
-            display: flex; justify-content: space-between; align-items: center;
         }
+        .brand h1 { font-size: 1rem; color: var(--accent-yellow); font-weight: 800; line-height: 1.2; }
+        .brand p { font-size: 0.7rem; color: var(--text-muted); }
 
-        .brand h1 { font-size: 1.05rem; color: var(--accent-yellow); font-weight: 800; }
-        .brand p { font-size: 0.72rem; color: var(--text-muted); }
+        .container { padding: 0.75rem; width: 100%; max-width: 500px; margin: 0 auto; }
+        .card { background: var(--card-bg); border-radius: 10px; border: 1px solid var(--border-color); padding: 0.85rem; margin-bottom: 0.85rem; }
+        .card-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-yellow); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 6px; }
 
-        .sheet-btn {
-            background: #059669; color: white; padding: 6px 12px;
-            border-radius: 6px; text-decoration: none; font-size: 0.78rem; font-weight: 700;
-            display: inline-flex; align-items: center; gap: 6px; border: 1px solid #10b981;
-        }
-
-        .container { padding: 1rem; max-width: 650px; margin: 0 auto; }
-        .card { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); padding: 1rem; margin-bottom: 1rem; }
-        .card-title { font-size: 0.9rem; font-weight: 700; color: var(--accent-yellow); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px; }
-
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-        .form-group { display: flex; flex-direction: column; gap: 4px; }
-        .form-group.full { grid-column: span 2; }
-        label { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem; }
+        .form-group { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+        .form-group.full { grid-column: 1 / -1; }
+        label { font-size: 0.68rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; word-break: break-word; }
+        
         input, select, textarea {
-            background: #0f172a; border: 1px solid var(--border-color); color: var(--text-main);
-            padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; outline: none;
+            width: 100%; background: #0f172a; border: 1px solid var(--border-color); color: var(--text-main);
+            padding: 7px 9px; border-radius: 6px; font-size: 0.8rem; outline: none; box-sizing: border-box;
         }
         input:focus, select:focus, textarea:focus { border-color: var(--accent-yellow); }
 
-        .item-row { padding: 10px 0; border-bottom: 1px solid var(--border-color); }
+        .item-row { padding: 8px 0; border-bottom: 1px solid var(--border-color); }
         .item-row:last-child { border-bottom: none; }
-        .item-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-        .item-name { font-size: 0.82rem; font-weight: 600; }
-        .badge-crit { background: rgba(239, 68, 68, 0.2); color: #fca5a5; font-size: 0.62rem; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+        .item-info { display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-bottom: 6px; }
+        .item-name { font-size: 0.78rem; font-weight: 600; word-break: break-word; flex: 1; }
+        .badge-crit { background: rgba(239, 68, 68, 0.2); color: #fca5a5; font-size: 0.58rem; padding: 2px 5px; border-radius: 4px; font-weight: 700; flex-shrink: 0; }
 
-        .btn-group { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+        .btn-group { display: flex; width: 100%; gap: 4px; }
         .btn-opt {
-            background: #0f172a; border: 1px solid var(--border-color); color: var(--text-muted);
-            padding: 6px; border-radius: 6px; font-weight: 700; font-size: 0.75rem; cursor: pointer; text-align: center;
+            flex: 1; background: #0f172a; border: 1px solid var(--border-color); color: var(--text-muted);
+            padding: 6px 0; border-radius: 5px; font-weight: 700; font-size: 0.72rem; cursor: pointer; text-align: center;
         }
         .btn-opt.baik.active { background: var(--pass-green); color: white; border-color: var(--pass-green); }
         .btn-opt.rusak.active { background: var(--fail-red); color: white; border-color: var(--fail-red); }
         .btn-opt.na.active { background: var(--na-gray); color: white; border-color: var(--na-gray); }
 
-        .status-banner { text-align: center; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 0.5px; }
+        .photo-box {
+            border: 1px dashed var(--accent-yellow); background: #0f172a; border-radius: 8px;
+            padding: 10px; text-align: center; cursor: pointer; margin-top: 5px;
+        }
+        .photo-box i { font-size: 1.5rem; color: var(--accent-yellow); margin-bottom: 4px; }
+        .photo-box p { font-size: 0.75rem; color: var(--text-muted); }
+        #photoPreview { width: 100%; max-height: 180px; object-fit: cover; border-radius: 6px; margin-top: 8px; display: none; }
+
+        .status-banner { text-align: center; padding: 10px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; margin-bottom: 0.85rem; }
         .status-ready { background: rgba(16, 185, 129, 0.2); color: var(--pass-green); border: 1px solid var(--pass-green); }
         .status-caution { background: rgba(245, 158, 11, 0.2); color: var(--accent-yellow); border: 1px solid var(--accent-yellow); }
         .status-stop { background: rgba(239, 68, 68, 0.2); color: var(--fail-red); border: 1px solid var(--fail-red); }
@@ -75,17 +76,16 @@
             position: fixed; bottom: 0; left: 0; right: 0; background: var(--card-bg);
             border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; padding: 8px 0; z-index: 100;
         }
-        .nav-item { color: var(--text-muted); text-decoration: none; font-size: 0.7rem; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .nav-item { color: var(--text-muted); text-decoration: none; font-size: 0.68rem; display: flex; flex-direction: column; align-items: center; gap: 3px; }
         .nav-item.active { color: var(--accent-yellow); }
-        .nav-item i { font-size: 1.1rem; }
+        .nav-item i { font-size: 1.05rem; }
 
         .submit-btn {
             background: var(--accent-yellow); color: #0f172a; font-weight: 800; width: 100%;
-            padding: 12px; border: none; border-radius: 8px; font-size: 0.95rem; cursor: pointer;
-            transition: all 0.2s ease;
+            padding: 12px; border: none; border-radius: 8px; font-size: 0.9rem; cursor: pointer;
         }
         .submit-btn:disabled { background: var(--na-gray); cursor: not-allowed; }
-        canvas { background: #0f172a; border: 1px dashed var(--border-color); border-radius: 6px; width: 100%; height: 90px; }
+        canvas { background: #0f172a; border: 1px dashed var(--border-color); border-radius: 6px; width: 100%; height: 85px; }
     </style>
 </head>
 <body>
@@ -95,20 +95,17 @@
             <h1>P2H MOBILE — PT. SKU</h1>
             <p>Database Online Google Sheets</p>
         </div>
-        <a href="https://docs.google.com/spreadsheets/d/1CNmykNC0Kz--XKmRL3iZ5yKfcKSkhZ0j4NJlWeTEkB8/edit?usp=drive_link" target="_blank" class="sheet-btn">
-            <i class="fa-solid fa-file-excel"></i> Sheet P2H
-        </a>
     </header>
 
     <div class="container">
         <div id="statusBanner" class="status-banner status-ready">READY TO OPERATE</div>
 
-        <!-- Kolom B - I: Identitas Operasional -->
+        <!-- Identitas Operasional -->
         <div class="card">
-            <div class="card-title"><i class="fa-solid fa-id-card"></i> Identitas Operasional & Unit</div>
+            <div class="card-title"><i class="fa-solid fa-id-card"></i> Identitas Operasional</div>
             <div class="form-grid">
                 <div class="form-group">
-                    <label>Tanggal & Jam Operasional</label>
+                    <label>Tanggal & Jam</label>
                     <input type="datetime-local" id="opDateTime">
                 </div>
                 <div class="form-group">
@@ -119,8 +116,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Kode Unit / No. Lambung</label>
-                    <input type="text" id="unitCode" placeholder="Contoh: LV-042 / DT-118">
+                    <label>Kode Unit</label>
+                    <input type="text" id="unitCode" placeholder="LV-042 / DT-118">
                 </div>
                 <div class="form-group">
                     <label>Jenis Unit</label>
@@ -132,27 +129,27 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Nama Driver / Operator</label>
+                    <label>Nama Driver</label>
                     <input type="text" id="driverName" placeholder="Nama Lengkap">
                 </div>
                 <div class="form-group">
                     <label>No. Badge / NIK</label>
-                    <input type="text" id="badgeNo" placeholder="Contoh: OPR-8821">
+                    <input type="text" id="badgeNo" placeholder="OPR-8821">
                 </div>
                 <div class="form-group">
                     <label>KM / HM Awal</label>
-                    <input type="text" id="hmStart" placeholder="Contoh: 124,580 KM / 14,820 HM">
+                    <input type="text" id="hmStart" placeholder="124,580 KM">
                 </div>
                 <div class="form-group">
                     <label>Lokasi / Pit</label>
-                    <input type="text" id="locationPit" placeholder="Pit North Bench 3 / Port">
+                    <input type="text" id="locationPit" placeholder="Pit North Bench 3">
                 </div>
             </div>
         </div>
 
-        <!-- Kolom J - O: Critical Safety Items (Stop-Go Logic) -->
+        <!-- Critical Items -->
         <div class="card">
-            <div class="card-title"><i class="fa-solid fa-triangle-exclamation"></i> Critical Safety Items (Stop-No-Go)</div>
+            <div class="card-title"><i class="fa-solid fa-triangle-exclamation"></i> Critical Safety Items</div>
             
             <div class="item-row">
                 <div class="item-info"><span class="item-name">Rem Utama & Handbrake</span><span class="badge-crit">CRITICAL</span></div>
@@ -173,7 +170,7 @@
             </div>
 
             <div class="item-row">
-                <div class="item-info"><span class="item-name">Lampu Rotator & Buggy Whip</span><span class="badge-crit">CRITICAL</span></div>
+                <div class="item-info"><span class="item-name">Rotator & Buggy Whip</span><span class="badge-crit">CRITICAL</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'rotator', 'BAIK')">BAIK</div>
                     <div class="btn-opt rusak" onclick="setCheck(this, 'rotator', 'RUSAK')">RUSAK</div>
@@ -200,7 +197,7 @@
             </div>
 
             <div class="item-row">
-                <div class="item-info"><span class="item-name">Seatbelt / Sabuk Pengaman</span><span class="badge-crit">CRITICAL</span></div>
+                <div class="item-info"><span class="item-name">Sabuk Pengaman (Seatbelt)</span><span class="badge-crit">CRITICAL</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'seatbelt', 'BAIK')">BAIK</div>
                     <div class="btn-opt rusak" onclick="setCheck(this, 'seatbelt', 'RUSAK')">RUSAK</div>
@@ -209,12 +206,12 @@
             </div>
         </div>
 
-        <!-- Kolom P - X: General Safety & Mechanical Items -->
+        <!-- Mechanical Items -->
         <div class="card">
-            <div class="card-title"><i class="fa-solid fa-wrench"></i> Pemeriksaan Fisik & Mekanis Umum</div>
+            <div class="card-title"><i class="fa-solid fa-wrench"></i> Mekanis Umum</div>
 
             <div class="item-row">
-                <div class="item-info"><span class="item-name">Ban & Mur Roda (Chassis)</span></div>
+                <div class="item-info"><span class="item-name">Ban & Mur Roda</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'ban', 'BAIK')">BAIK</div>
                     <div class="btn-opt rusak" onclick="setCheck(this, 'ban', 'RUSAK')">RUSAK</div>
@@ -223,7 +220,7 @@
             </div>
 
             <div class="item-row">
-                <div class="item-info"><span class="item-name">Lampu Utama, Sein & Mundur</span></div>
+                <div class="item-info"><span class="item-name">Lampu Utama & Sein</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'lampu', 'BAIK')">BAIK</div>
                     <div class="btn-opt rusak" onclick="setCheck(this, 'lampu', 'RUSAK')">RUSAK</div>
@@ -232,7 +229,7 @@
             </div>
 
             <div class="item-row">
-                <div class="item-info"><span class="item-name">Spion & Wiper Window</span></div>
+                <div class="item-info"><span class="item-name">Spion & Wiper</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'spion', 'BAIK')">BAIK</div>
                     <div class="btn-opt rusak" onclick="setCheck(this, 'spion', 'RUSAK')">RUSAK</div>
@@ -259,7 +256,7 @@
             </div>
 
             <div class="item-row">
-                <div class="item-info"><span class="item-name">Level Minyak Rem & Power Steering</span></div>
+                <div class="item-info"><span class="item-name">Level Minyak Rem/Steering</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'minyakRem', 'BAIK')">BAIK</div>
                     <div class="btn-opt rusak" onclick="setCheck(this, 'minyakRem', 'RUSAK')">RUSAK</div>
@@ -268,7 +265,7 @@
             </div>
 
             <div class="item-row">
-                <div class="item-info"><span class="item-name">Kebocoran Fluid (Oli/Hydraulic)</span></div>
+                <div class="item-info"><span class="item-name">Kebocoran Fluid</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'kebocoran', 'BAIK')">BAIK</div>
                     <div class="btn-opt rusak" onclick="setCheck(this, 'kebocoran', 'RUSAK')">RUSAK</div>
@@ -277,7 +274,7 @@
             </div>
 
             <div class="item-row">
-                <div class="item-info"><span class="item-name">Body & Chassis Damage</span></div>
+                <div class="item-info"><span class="item-name">Body & Chassis</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'bodyChassis', 'BAIK')">BAIK</div>
                     <div class="btn-opt rusak" onclick="setCheck(this, 'bodyChassis', 'RUSAK')">RUSAK</div>
@@ -286,7 +283,7 @@
             </div>
 
             <div class="item-row">
-                <div class="item-info"><span class="item-name">Kotak P3K & Segitiga Pengaman</span></div>
+                <div class="item-info"><span class="item-name">Kotak P3K & Segitiga</span></div>
                 <div class="btn-group">
                     <div class="btn-opt baik active" onclick="setCheck(this, 'p3k', 'BAIK')">BAIK</div>
                     <div class="btn-opt rusak" onclick="setCheck(this, 'p3k', 'RUSAK')">RUSAK</div>
@@ -295,21 +292,32 @@
             </div>
         </div>
 
-        <!-- Kolom Z - AC: Catatan, Tanda Tangan & Supervisor Approval -->
+        <!-- Foto Kendaraan -->
+        <div class="card">
+            <div class="card-title"><i class="fa-solid fa-camera"></i> Ambil Foto Kendaraan</div>
+            <div class="photo-box" onclick="document.getElementById('cameraInput').click()">
+                <i class="fa-solid fa-camera-retro"></i>
+                <p>Klik untuk Ambil / Upload Foto Unit</p>
+                <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;" onchange="previewPhoto(event)">
+            </div>
+            <img id="photoPreview" alt="Preview Foto Unit">
+        </div>
+
+        <!-- Catatan & Pengesahan -->
         <div class="card">
             <div class="card-title"><i class="fa-solid fa-pen-nib"></i> Catatan & Pengesahan</div>
-            <div class="form-group full" style="margin-bottom: 10px;">
-                <label>Catatan / Detail Kerusakan (Remarks)</label>
-                <textarea id="remarks" rows="2" placeholder="Tuliskan detail kerusakan jika ada..."></textarea>
+            <div class="form-group full" style="margin-bottom: 8px;">
+                <label>Catatan Kerusakan (Remarks)</label>
+                <textarea id="remarks" rows="2" placeholder="Tuliskan kendala jika ada..."></textarea>
             </div>
             
-            <div class="form-grid" style="margin-bottom: 10px;">
+            <div class="form-grid" style="margin-bottom: 8px;">
                 <div class="form-group">
-                    <label>Nama Supervisor / Foreperson</label>
-                    <input type="text" id="supervisorName" placeholder="Contoh: Hendro Wijaya">
+                    <label>Supervisor / Foreperson</label>
+                    <input type="text" id="supervisorName" placeholder="Nama Supervisor">
                 </div>
                 <div class="form-group">
-                    <label>Status Approval Supervisor</label>
+                    <label>Approval Supervisor</label>
                     <select id="supervisorApproval">
                         <option value="APPROVED">APPROVED</option>
                         <option value="PENDING">PENDING</option>
@@ -318,9 +326,9 @@
                 </div>
             </div>
 
-            <label style="margin-bottom:4px; display:block;">Tanda Tangan Driver / Operator</label>
+            <label style="margin-bottom:4px; display:block;">Tanda Tangan Driver</label>
             <canvas id="sigCanvas"></canvas>
-            <button style="background:transparent; border:none; color:var(--text-muted); font-size:0.75rem; margin-top:4px; cursor:pointer;" onclick="clearCanvas()">Clear Signature</button>
+            <button style="background:transparent; border:none; color:var(--text-muted); font-size:0.72rem; margin-top:4px; cursor:pointer;" onclick="clearCanvas()">Clear Signature</button>
         </div>
 
         <button id="submitBtn" class="submit-btn" onclick="submitForm()"><i class="fa-solid fa-paper-plane"></i> Kirim Laporan ke Google Sheet</button>
@@ -335,9 +343,10 @@
     </div>
 
     <script>
-        // Endpoint Google Apps Script yang telah diisi
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzm3ceTfJKOPaHBW11pnbBnbc6FyER8oIGxsygK5lKFjj0o31YIclrak2QT2i8lMzFIRg/exec";
+        // Endpoint Google Apps Script Terbaru
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyp7F37lwYf6sFqX7xU0jNuI4BVKoqgUb4lE2HB0gIGwTvxPO01gBjiyZuV5Dsy6oEShQ/exec";
 
+        let photoBase64 = "";
         const checks = {
             rem: 'BAIK', kemudi: 'BAIK', rotator: 'BAIK', radio: 'BAIK', apar: 'BAIK', seatbelt: 'BAIK',
             ban: 'BAIK', lampu: 'BAIK', spion: 'BAIK', klakson: 'BAIK', oliRadiator: 'BAIK',
@@ -346,7 +355,6 @@
 
         const criticalKeys = ['rem', 'kemudi', 'rotator', 'radio', 'apar', 'seatbelt'];
 
-        // Default Waktu Sekarang
         document.getElementById('opDateTime').value = new Date().toISOString().slice(0, 16);
 
         function setCheck(element, key, val) {
@@ -386,12 +394,37 @@
             }
         }
 
-        // Canvas Tanda Tangan
+        function previewPhoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        const maxWidth = 600;
+                        const scale = maxWidth / img.width;
+                        canvas.width = maxWidth;
+                        canvas.height = img.height * scale;
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        
+                        photoBase64 = canvas.toDataURL('image/jpeg', 0.6);
+                        const preview = document.getElementById('photoPreview');
+                        preview.src = photoBase64;
+                        preview.style.display = 'block';
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
         const canvas = document.getElementById('sigCanvas');
         const ctx = canvas.getContext('2d');
         let drawing = false;
 
-        function resizeCanvas() { canvas.width = canvas.offsetWidth; canvas.height = 90; }
+        function resizeCanvas() { canvas.width = canvas.offsetWidth; canvas.height = 85; }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
@@ -421,7 +454,6 @@
 
         function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
 
-        // Pengiriman Data ke Google Sheet via Apps Script
         function submitForm() {
             const unitCode = document.getElementById('unitCode').value;
             const driverName = document.getElementById('driverName').value;
@@ -434,7 +466,6 @@
             const currentStatus = evaluateFeasibility();
             const submitBtn = document.getElementById('submitBtn');
             
-            // Indikasi Loading
             submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengirim Laporan...`;
             submitBtn.disabled = true;
 
@@ -465,6 +496,7 @@
                 statusKelayakan: currentStatus,
                 remarks: document.getElementById('remarks').value,
                 signature: 'Ttd: ' + driverName,
+                photoData: photoBase64 ? photoBase64 : "No Photo",
                 supervisorName: document.getElementById('supervisorName').value,
                 supervisorApproval: document.getElementById('supervisorApproval').value
             };
@@ -476,7 +508,7 @@
                 body: JSON.stringify(payload)
             })
             .then(() => {
-                alert(`Laporan P2H Unit ${unitCode} BERHASIL TERKIRIM ke Google Sheet!\nStatus: ${currentStatus}`);
+                alert(`Laporan P2H Unit ${unitCode} + FOTO BERHASIL TERKIRIM ke Google Sheet!\nStatus: ${currentStatus}`);
                 submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Kirim Laporan ke Google Sheet`;
                 submitBtn.disabled = false;
             })
