@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2H Operasional Tambang - PT. SKU</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-yellow: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --pass-green: #10b981;
+            --fail-red: #ef4444;
+            --na-gray: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); padding-bottom: 80px; }
+
+        header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 1rem; border-bottom: 2px solid var(--accent-yellow);
+            position: sticky; top: 0; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .brand h1 { font-size: 1.05rem; color: var(--accent-yellow); font-weight: 800; }
+        .brand p { font-size: 0.72rem; color: var(--text-muted); }
+
+        .sheet-btn {
+            background: #059669; color: white; padding: 6px 12px;
+            border-radius: 6px; text-decoration: none; font-size: 0.78rem; font-weight: 700;
+            display: inline-flex; align-items: center; gap: 6px; border: 1px solid #10b981;
+        }
+
+        .container { padding: 1rem; max-width: 650px; margin: 0 auto; }
+        .card { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); padding: 1rem; margin-bottom: 1rem; }
+        .card-title { font-size: 0.9rem; font-weight: 700; color: var(--accent-yellow); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px; }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+        .form-group { display: flex; flex-direction: column; gap: 4px; }
+        .form-group.full { grid-column: span 2; }
+        label { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+        input, select, textarea {
+            background: #0f172a; border: 1px solid var(--border-color); color: var(--text-main);
+            padding: 8px 10px; border-radius: 6px; font-size: 0.85rem; outline: none;
+        }
+        input:focus, select:focus, textarea:focus { border-color: var(--accent-yellow); }
+
+        .item-row { padding: 10px 0; border-bottom: 1px solid var(--border-color); }
+        .item-row:last-child { border-bottom: none; }
+        .item-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        .item-name { font-size: 0.82rem; font-weight: 600; }
+        .badge-crit { background: rgba(239, 68, 68, 0.2); color: #fca5a5; font-size: 0.62rem; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+
+        .btn-group { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+        .btn-opt {
+            background: #0f172a; border: 1px solid var(--border-color); color: var(--text-muted);
+            padding: 6px; border-radius: 6px; font-weight: 700; font-size: 0.75rem; cursor: pointer; text-align: center;
+        }
+        .btn-opt.baik.active { background: var(--pass-green); color: white; border-color: var(--pass-green); }
+        .btn-opt.rusak.active { background: var(--fail-red); color: white; border-color: var(--fail-red); }
+        .btn-opt.na.active { background: var(--na-gray); color: white; border-color: var(--na-gray); }
+
+        .status-banner { text-align: center; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 0.5px; }
+        .status-ready { background: rgba(16, 185, 129, 0.2); color: var(--pass-green); border: 1px solid var(--pass-green); }
+        .status-caution { background: rgba(245, 158, 11, 0.2); color: var(--accent-yellow); border: 1px solid var(--accent-yellow); }
+        .status-stop { background: rgba(239, 68, 68, 0.2); color: var(--fail-red); border: 1px solid var(--fail-red); }
+
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; right: 0; background: var(--card-bg);
+            border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; padding: 8px 0; z-index: 100;
+        }
+        .nav-item { color: var(--text-muted); text-decoration: none; font-size: 0.7rem; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .nav-item.active { color: var(--accent-yellow); }
+        .nav-item i { font-size: 1.1rem; }
+
+        .submit-btn {
+            background: var(--accent-yellow); color: #0f172a; font-weight: 800; width: 100%;
+            padding: 12px; border: none; border-radius: 8px; font-size: 0.95rem; cursor: pointer;
+        }
+        canvas { background: #0f172a; border: 1px dashed var(--border-color); border-radius: 6px; width: 100%; height: 90px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            <h1>P2H MOBILE — PT. SKU</h1>
+            <p>Database Sheet Standardized</p>
+        </div>
+        <a href="https://docs.google.com/spreadsheets/d/1CNmykNC0Kz--XKmRL3iZ5yKfcKSkhZ0j4NJlWeTEkB8/edit?usp=drive_link" target="_blank" class="sheet-btn">
+            <i class="fa-solid fa-file-excel"></i> Sheet P2H
+        </a>
+    </header>
+
+    <div class="container">
+        <div id="statusBanner" class="status-banner status-ready">READY TO OPERATE</div>
+
+        <!-- Kolom B - I: Identitas Operasional -->
+        <div class="card">
+            <div class="card-title"><i class="fa-solid fa-id-card"></i> Identitas Operasional & Unit</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Tanggal & Jam Operasional</label>
+                    <input type="datetime-local" id="opDateTime">
+                </div>
+                <div class="form-group">
+                    <label>Shift</label>
+                    <select id="shift">
+                        <option value="Shift 1 (Siang)">Shift 1 (Siang)</option>
+                        <option value="Shift 2 (Malam)">Shift 2 (Malam)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Kode Unit / No. Lambung</label>
+                    <input type="text" id="unitCode" placeholder="Contoh: LV-042 / DT-118">
+                </div>
+                <div class="form-group">
+                    <label>Jenis Unit</label>
+                    <select id="unitType">
+                        <option value="Light Vehicle (LV)">Light Vehicle (LV)</option>
+                        <option value="Dump Truck (DT)">Dump Truck (DT)</option>
+                        <option value="Excavator (EX)">Excavator (EX)</option>
+                        <option value="Support Unit">Support Unit</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Nama Driver / Operator</label>
+                    <input type="text" id="driverName" placeholder="Nama Lengkap">
+                </div>
+                <div class="form-group">
+                    <label>No. Badge / NIK</label>
+                    <input type="text" id="badgeNo" placeholder="Contoh: OPR-8821">
+                </div>
+                <div class="form-group">
+                    <label>KM / HM Awal</label>
+                    <input type="text" id="hmStart" placeholder="Contoh: 124,580 KM / 14,820 HM">
+                </div>
+                <div class="form-group">
+                    <label>Lokasi / Pit</label>
+                    <input type="text" id="locationPit" placeholder="Pit North Bench 3 / Port">
+                </div>
+            </div>
+        </div>
+
+        <!-- Kolom J - O: Critical Safety Items (Stop-Go Logic) -->
+        <div class="card">
+            <div class="card-title"><i class="fa-solid fa-triangle-exclamation"></i> Critical Safety Items (Stop-No-Go)</div>
+            
+            <div class="item-row" data-key="rem">
+                <div class="item-info"><span class="item-name">Rem Utama & Handbrake</span><span class="badge-crit">CRITICAL</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'rem', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'rem', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'rem', 'N/A')">N/A</div>
+                </div>
+            </div>
+
+            <div class="item-row" data-key="kemudi">
+                <div class="item-info"><span class="item-name">Kemudi & Steering System</span><span class="badge-crit">CRITICAL</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'kemudi', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'kemudi', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'kemudi', 'N/A')">N/A</div>
+                </div>
+            </div>
+
+            <div class="item-row" data-key="rotator">
+                <div class="item-info"><span class="item-name">Lampu Rotator & Buggy Whip</span><span class="badge-crit">CRITICAL</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'rotator', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'rotator', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'rotator', 'N/A')">N/A</div>
+                </div>
+            </div>
+
+            <div class="item-row" data-key="radio">
+                <div class="item-info"><span class="item-name">Radio Komunikasi 2-Way</span><span class="badge-crit">CRITICAL</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'radio', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'radio', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'radio', 'N/A')">N/A</div>
+                </div>
+            </div>
+
+            <div class="item-row" data-key="apar">
+                <div class="item-info"><span class="item-name">APAR</span><span class="badge-crit">CRITICAL</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'apar', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'apar', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'apar', 'N/A')">N/A</div>
+                </div>
+            </div>
+
+            <div class="item-row" data-key="seatbelt">
+                <div class="item-info"><span class="item-name">Seatbelt / Sabuk Pengaman</span><span class="badge-crit">CRITICAL</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'seatbelt', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'seatbelt', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'seatbelt', 'N/A')">N/A</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kolom P - X: General Safety & Mechanical Items -->
+        <div class="card">
+            <div class="card-title"><i class="fa-solid fa-wrench"></i> Pemeriksaan Fisik & Mekanis Umum</div>
+
+            <div class="item-row" data-key="ban">
+                <div class="item-info"><span class="item-name">Ban & Mur Roda (Chassis)</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'ban', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'ban', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'ban', 'N/A')">N/A</div>
+                </div>
+            </div>
+
+            <div class="item-row" data-key="lampu">
+                <div class="item-info"><span class="item-name">Lampu Utama, Sein & Mundur</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'lampu', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'lampu', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'lampu', 'N/A')">N/A</div>
+                </div>
+            </div>
+
+            <div class="item-row" data-key="spion">
+                <div class="item-info"><span class="item-name">Spion & Wiper Window</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'spion', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'spion', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'spion', 'N/A')">N/A</div>
+                </div>
+            </div>
+
+            <div class="item-row" data-key="klakson">
+                <div class="item-info"><span class="item-name">Klakson & Alarm Mundur</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'klakson', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'klakson', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'klakson', 'N/A')">N/A</div>
+                </div>
+            </div>
+
+            <div class="item-row" data-key="oliRadiator">
+                <div class="item-info"><span class="item-name">Level Oli & Air Radiator</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'oliRadiator', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'oliRadiator', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'oliRadiator', 'N/A')">N/A</div>
+                </div>
+            </div>
+
+            <div class="item-row" data-key="minyakRem">
+                <div class="item-info"><span class="item-name">Level Minyak Rem & Power Steering</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'minyakRem', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'minyakRem', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'minyakRem', 'N/A')">N/A</div>
+                </div>
+            </div>
+
+            <div class="item-row" data-key="kebocoran">
+                <div class="item-info"><span class="item-name">Kebocoran Fluid (Oli/Hydraulic)</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'kebocoran', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'kebocoran', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'kebocoran', 'N/A')">N/A</div>
+                </div>
+            </div>
+
+            <div class="item-row" data-key="bodyChassis">
+                <div class="item-info"><span class="item-name">Body & Chassis Damage</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'bodyChassis', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'bodyChassis', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'bodyChassis', 'N/A')">N/A</div>
+                </div>
+            </div>
+
+            <div class="item-row" data-key="p3k">
+                <div class="item-info"><span class="item-name">Kotak P3K & Segitiga Pengaman</span></div>
+                <div class="btn-group">
+                    <div class="btn-opt baik active" onclick="setCheck(this, 'p3k', 'BAIK')">BAIK</div>
+                    <div class="btn-opt rusak" onclick="setCheck(this, 'p3k', 'RUSAK')">RUSAK</div>
+                    <div class="btn-opt na" onclick="setCheck(this, 'p3k', 'N/A')">N/A</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kolom Z - AC: Catatan, Tanda Tangan & Supervisor Approval -->
+        <div class="card">
+            <div class="card-title"><i class="fa-solid fa-pen-nib"></i> Catatan & Pengesahan</div>
+            <div class="form-group full" style="margin-bottom: 10px;">
+                <label>Catatan / Detail Kerusakan (Remarks)</label>
+                <textarea id="remarks" rows="2" placeholder="Tuliskan detail kerusakan jika ada..."></textarea>
+            </div>
+            
+            <div class="form-grid" style="margin-bottom: 10px;">
+                <div class="form-group">
+                    <label>Nama Supervisor / Foreperson</label>
+                    <input type="text" id="supervisorName" placeholder="Contoh: Hendro Wijaya">
+                </div>
+                <div class="form-group">
+                    <label>Status Approval Supervisor</label>
+                    <select id="supervisorApproval">
+                        <option value="APPROVED">APPROVED</option>
+                        <option value="PENDING">PENDING</option>
+                        <option value="REJECTED">REJECTED</option>
+                    </select>
+                </div>
+            </div>
+
+            <label style="margin-bottom:4px; display:block;">Tanda Tangan Driver / Operator</label>
+            <canvas id="sigCanvas"></canvas>
+            <button style="background:transparent; border:none; color:var(--text-muted); font-size:0.75rem; margin-top:4px; cursor:pointer;" onclick="clearCanvas()">Clear Signature</button>
+        </div>
+
+        <button class="submit-btn" onclick="submitForm()"><i class="fa-solid fa-paper-plane"></i> Kirim Laporan ke Google Sheet</button>
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active"><i class="fa-solid fa-clipboard-check"></i> Form P2H</a>
+        <a href="https://docs.google.com/spreadsheets/d/1CNmykNC0Kz--XKmRL3iZ5yKfcKSkhZ0j4NJlWeTEkB8/edit?usp=drive_link" target="_blank" class="nav-item">
+            <i class="fa-solid fa-table"></i> Database Sheet
+        </a>
+    </div>
+
+    <script>
+        // Store status item checks
+        const checks = {
+            rem: 'BAIK', kemudi: 'BAIK', rotator: 'BAIK', radio: 'BAIK', apar: 'BAIK', seatbelt: 'BAIK',
+            ban: 'BAIK', lampu: 'BAIK', spion: 'BAIK', klakson: 'BAIK', oliRadiator: 'BAIK',
+            minyakRem: 'BAIK', kebocoran: 'BAIK', bodyChassis: 'BAIK', p3k: 'BAIK'
+        };
+
+        const criticalKeys = ['rem', 'kemudi', 'rotator', 'radio', 'apar', 'seatbelt'];
+
+        // Set default datetime to local current time
+        document.getElementById('opDateTime').value = new Date().toISOString().slice(0, 16);
+
+        function setCheck(element, key, val) {
+            const parent = element.parentElement;
+            parent.querySelectorAll('.btn-opt').forEach(b => b.classList.remove('active'));
+            element.classList.add('active');
+            checks[key] = val;
+            evaluateFeasibility();
+        }
+
+        function evaluateFeasibility() {
+            let hasCriticalFail = false;
+            let hasGeneralFail = false;
+
+            criticalKeys.forEach(k => {
+                if (checks[k] === 'RUSAK') hasCriticalFail = true;
+            });
+
+            Object.keys(checks).forEach(k => {
+                if (!criticalKeys.includes(k) && checks[k] === 'RUSAK') hasGeneralFail = true;
+            });
+
+            const banner = document.getElementById('statusBanner');
+
+            if (hasCriticalFail) {
+                banner.className = "status-banner status-stop";
+                banner.innerText = "STOP-NO-GO (DILARANG OPERASI)";
+                return "STOP-NO-GO";
+            } else if (hasGeneralFail) {
+                banner.className = "status-banner status-caution";
+                banner.innerText = "OPERATE WITH CAUTION";
+                return "OPERATE WITH CAUTION";
+            } else {
+                banner.className = "status-banner status-ready";
+                banner.innerText = "READY TO OPERATE";
+                return "READY TO OPERATE";
+            }
+        }
+
+        // Signature Canvas Handler
+        const canvas = document.getElementById('sigCanvas');
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+
+        function resizeCanvas() { canvas.width = canvas.offsetWidth; canvas.height = 90; }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        canvas.addEventListener('mousedown', () => drawing = true);
+        canvas.addEventListener('mouseup', () => { drawing = false; ctx.beginPath(); });
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('touchstart', (e) => { drawing = true; e.preventDefault(); });
+        canvas.addEventListener('touchend', () => { drawing = false; ctx.beginPath(); });
+        canvas.addEventListener('touchmove', drawTouch);
+
+        function draw(e) {
+            if (!drawing) return;
+            ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.strokeStyle = '#f59e0b';
+            ctx.lineTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+            ctx.stroke(); ctx.beginPath();
+            ctx.moveTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+        }
+
+        function drawTouch(e) {
+            if (!drawing) return;
+            const touch = e.touches[0];
+            ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.strokeStyle = '#f59e0b';
+            ctx.lineTo(touch.clientX - canvas.getBoundingClientRect().left, touch.clientY - canvas.getBoundingClientRect().top);
+            ctx.stroke(); ctx.beginPath();
+            ctx.moveTo(touch.clientX - canvas.getBoundingClientRect().left, touch.clientY - canvas.getBoundingClientRect().top);
+        }
+
+        function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+
+        function submitForm() {
+            const unitCode = document.getElementById('unitCode').value;
+            const driverName = document.getElementById('driverName').value;
+
+            if(!unitCode || !driverName) {
+                alert('Mohon lengkapi Kode Unit dan Nama Driver!');
+                return;
+            }
+
+            const currentStatus = evaluateFeasibility();
+
+            // Structure data matching Column A - AC (29 Columns)
+            const payload = {
+                timestamp: new Date().toLocaleString('id-ID'),
+                opDateTime: document.getElementById('opDateTime').value.replace('T', ' '),
+                shift: document.getElementById('shift').value,
+                unitCode: unitCode,
+                unitType: document.getElementById('unitType').value,
+                driverName: driverName,
+                badgeNo: document.getElementById('badgeNo').value,
+                locationPit: document.getElementById('locationPit').value,
+                hmStart: document.getElementById('hmStart').value,
+                // Critical Items
+                rem: checks.rem,
+                kemudi: checks.kemudi,
+                rotator: checks.rotator,
+                radio: checks.radio,
+                apar: checks.apar,
+                seatbelt: checks.seatbelt,
+                // Mechanical Items
+                ban: checks.ban,
+                lampu: checks.lampu,
+                spion: checks.spion,
+                klakson: checks.klakson,
+                oliRadiator: checks.oliRadiator,
+                minyakRem: checks.minyakRem,
+                kebocoran: checks.kebocoran,
+                bodyChassis: checks.bodyChassis,
+                p3k: checks.p3k,
+                // Status & Verification
+                statusKelayakan: currentStatus,
+                remarks: document.getElementById('remarks').value,
+                signature: 'Ttd: ' + driverName,
+                supervisorName: document.getElementById('supervisorName').value,
+                supervisorApproval: document.getElementById('supervisorApproval').value
+            };
+
+            console.log('Payload Data P2H 29 Kolom:', payload);
+            alert(`Laporan P2H Unit ${unitCode} berhasil disimpan!\nStatus Kelayakan: ${currentStatus}`);
+        }
+    </script>
+</body>
+</html>
