@@ -25,6 +25,12 @@
             background: linear-gradient(135deg, #1e293b, #0f172a);
             padding: 0.85rem 1rem; border-bottom: 2px solid var(--accent-yellow);
             position: sticky; top: 0; z-index: 100;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .header-logo {
+            width: 42px; height: 42px; border-radius: 50%;
+            object-fit: cover; background: #000; padding: 2px;
+            border: 1px solid var(--accent-yellow); flex-shrink: 0;
         }
         .brand h1 { font-size: 1rem; color: var(--accent-yellow); font-weight: 800; line-height: 1.2; }
         .brand p { font-size: 0.7rem; color: var(--text-muted); }
@@ -90,6 +96,8 @@
 <body>
 
     <header>
+        <!-- Logo SKU dari Google Drive Direct Image URL -->
+        <img src="https://lh3.googleusercontent.com/d/150NvhVJVrOsMrt2e8vDCaf0pucfg0Z1P" alt="Logo PT. SKU" class="header-logo">
         <div class="brand">
             <h1>P2H MOBILE — PT. SKU</h1>
             <p>Database Online Google Sheets</p>
