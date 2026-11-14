@@ -1,527 +1,2982 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>P2H Operasional Tambang - PT. SKU</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-yellow: #f59e0b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-            --pass-green: #10b981;
-            --fail-red: #ef4444;
-            --na-gray: #64748b;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>SPT Group — Aplikasi P2H & Pemeliharaan Unit Tambang Bauksit</title>
+  <style>
+    :root {
+      --primary: #0f2942;
+      --primary-light: #1e4268;
+      --accent: #d97706;
+      --accent-hover: #b45309;
+      --danger: #dc2626;
+      --danger-bg: #fef2f2;
+      --warning: #d97706;
+      --warning-bg: #fffbeb;
+      --success: #15803d;
+      --success-bg: #f0fdf4;
+      --info: #0369a1;
+      --info-bg: #f0f9ff;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --border: #cbd5e1;
+      --text: #0f172a;
+      --muted: #475569;
+      --radius: 10px;
+      --shadow: 0 4px 14px rgba(15, 41, 66, 0.08);
+    }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-        html, body { width: 100%; overflow-x: hidden; background-color: var(--bg-color); color: var(--text-main); padding-bottom: 70px; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        header {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            padding: 0.85rem 1rem; border-bottom: 2px solid var(--accent-yellow);
-            position: sticky; top: 0; z-index: 100;
-            display: flex; align-items: center; gap: 12px;
-        }
-        .header-logo {
-            width: 42px; height: 42px; border-radius: 50%;
-            object-fit: cover; background: #000; padding: 2px;
-            border: 1px solid var(--accent-yellow); flex-shrink: 0;
-        }
-        .brand h1 { font-size: 1rem; color: var(--accent-yellow); font-weight: 800; line-height: 1.2; }
-        .brand p { font-size: 0.7rem; color: var(--text-muted); }
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+    }
 
-        .container { padding: 0.75rem; width: 100%; max-width: 500px; margin: 0 auto; }
-        .card { background: var(--card-bg); border-radius: 10px; border: 1px solid var(--border-color); padding: 0.85rem; margin-bottom: 0.85rem; }
-        .card-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-yellow); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 6px; }
+    body {
+      font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+      padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px));
+    }
 
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem; }
-        .form-group { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-        .form-group.full { grid-column: 1 / -1; }
-        label { font-size: 0.68rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; word-break: break-word; }
-        
-        input, select, textarea {
-            width: 100%; background: #0f172a; border: 1px solid var(--border-color); color: var(--text-main);
-            padding: 7px 9px; border-radius: 6px; font-size: 0.8rem; outline: none; box-sizing: border-box;
-        }
-        input:focus, select:focus, textarea:focus { border-color: var(--accent-yellow); }
+    /* =========================================================================
+       TOP HEADER (PRECISION DESKTOP & MOBILE)
+       ========================================================================= */
+    .app-header {
+      background: linear-gradient(135deg, #0b1f33 0%, #163a5f 100%);
+      color: #fff;
+      padding: 14px 20px;
+      border-bottom: 4px solid var(--accent);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    }
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+    .logo-wrap {
+      background: #ffffff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 56px;
+      min-width: 132px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    .logo-wrap img {
+      max-height: 44px;
+      max-width: 156px;
+      object-fit: contain;
+      display: block;
+    }
+    .brand-title {
+      min-width: 0;
+    }
+    .brand-title h1 {
+      font-size: 1.22rem;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+    .brand-title p {
+      font-size: 0.81rem;
+      color: #cbd5e1;
+      margin-top: 2px;
+    }
+    .sync-pill-area {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 13px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #fff;
+      white-space: nowrap;
+      transition: all 0.25s ease;
+    }
+    .status-badge.uploading {
+      background: rgba(217, 119, 6, 0.28);
+      border-color: #fbbf24;
+      color: #fef3c7;
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.35);
+    }
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .dot.online { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+    .dot.warn { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
+    .dot.offline { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
+    .mini-spinner {
+      width: 12px;
+      height: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #fbbf24;
+      border-radius: 50%;
+      animation: spin360 0.75s linear infinite;
+      display: inline-block;
+      flex-shrink: 0;
+    }
 
-        .item-row { padding: 8px 0; border-bottom: 1px solid var(--border-color); }
-        .item-row:last-child { border-bottom: none; }
-        .item-info { display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-bottom: 6px; }
-        .item-name { font-size: 0.78rem; font-weight: 600; word-break: break-word; flex: 1; }
-        .badge-crit { background: rgba(239, 68, 68, 0.2); color: #fca5a5; font-size: 0.58rem; padding: 2px 5px; border-radius: 4px; font-weight: 700; flex-shrink: 0; }
+    /* =========================================================================
+       MAIN CONTAINER
+       ========================================================================= */
+    .container {
+      max-width: 1280px;
+      margin: 18px auto;
+      padding: 0 16px;
+    }
 
-        .btn-group { display: flex; width: 100%; gap: 4px; }
-        .btn-opt {
-            flex: 1; background: #0f172a; border: 1px solid var(--border-color); color: var(--text-muted);
-            padding: 6px 0; border-radius: 5px; font-weight: 700; font-size: 0.72rem; cursor: pointer; text-align: center;
-        }
-        .btn-opt.baik.active { background: var(--pass-green); color: white; border-color: var(--pass-green); }
-        .btn-opt.rusak.active { background: var(--fail-red); color: white; border-color: var(--fail-red); }
-        .btn-opt.na.active { background: var(--na-gray); color: white; border-color: var(--na-gray); }
+    /* =========================================================================
+       TOP DROPDOWN SELECTOR CARD (PERUSAHAAN ATAS, KENDARAAN BAWAH)
+       ========================================================================= */
+    .selector-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+    .selector-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .selector-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .selector-label {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 0.81rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--primary);
+    }
+    .selector-tag {
+      font-size: 0.73rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 5px;
+      background: #e2e8f0;
+      color: #1e293b;
+    }
+    .custom-select {
+      width: 100%;
+      min-height: 46px;
+      padding: 10px 14px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      background-color: #f8fafc;
+      border: 2px solid #94a3b8;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .custom-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(15, 41, 66, 0.14);
+    }
 
-        .photo-box {
-            border: 1px dashed var(--accent-yellow); background: #0f172a; border-radius: 8px;
-            padding: 10px; text-align: center; cursor: pointer; margin-top: 5px;
-        }
-        .photo-box i { font-size: 1.5rem; color: var(--accent-yellow); margin-bottom: 4px; }
-        .photo-box p { font-size: 0.75rem; color: var(--text-muted); }
-        #photoPreview { width: 100%; max-height: 180px; object-fit: cover; border-radius: 6px; margin-top: 8px; display: none; }
+    /* =========================================================================
+       NAVIGATION TABS (EQUAL-WIDTH PRECISION GRID)
+       ========================================================================= */
+    .nav-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .tab-btn {
+      min-height: 46px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #ffffff;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.86rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+      transition: all 0.18s;
+    }
+    .tab-btn:hover { background: #f8fafc; color: var(--primary); }
+    .tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 3px 10px rgba(15, 41, 66, 0.22);
+    }
+    .tab-badge {
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
 
-        .status-banner { text-align: center; padding: 10px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; margin-bottom: 0.85rem; }
-        .status-ready { background: rgba(16, 185, 129, 0.2); color: var(--pass-green); border: 1px solid var(--pass-green); }
-        .status-caution { background: rgba(245, 158, 11, 0.2); color: var(--accent-yellow); border: 1px solid var(--accent-yellow); }
-        .status-stop { background: rgba(239, 68, 68, 0.2); color: var(--fail-red); border: 1px solid var(--fail-red); }
+    /* =========================================================================
+       CARDS & FORM ELEMENTS
+       ========================================================================= */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+    .doc-banner {
+      background: linear-gradient(90deg, #0f2942 0%, #1e4268 100%);
+      color: #fff;
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .doc-banner h2 {
+      font-size: 1.04rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      line-height: 1.3;
+    }
+    .doc-banner span {
+      display: block;
+      font-size: 0.8rem;
+      color: #fde68a;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+    .banner-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
 
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0; background: var(--card-bg);
-            border-top: 1px solid var(--border-color); display: flex; justify-content: center; padding: 8px 0; z-index: 100;
-        }
-        .nav-item { color: var(--accent-yellow); text-decoration: none; font-size: 0.75rem; font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 3px; }
-        .nav-item i { font-size: 1.1rem; }
+    /* PRECISION RESPONSIVE FORM GRIDS */
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .grid-4.cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 0;
+    }
+    .field-group label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.25px;
+    }
+    .field-group input, .field-group select, .field-group textarea {
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 11px;
+      border: 1px solid #94a3b8;
+      border-radius: 6px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      background: #fff;
+      color: var(--text);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .field-group input:focus, .field-group select:focus, .field-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(15, 41, 66, 0.12);
+    }
+    .field-group input[readonly] {
+      background: #f1f5f9;
+      font-weight: 800;
+      color: var(--primary);
+    }
 
-        .submit-btn {
-            background: var(--accent-yellow); color: #0f172a; font-weight: 800; width: 100%;
-            padding: 12px; border: none; border-radius: 8px; font-size: 0.9rem; cursor: pointer;
-        }
-        .submit-btn:disabled { background: var(--na-gray); cursor: not-allowed; }
-        canvas { background: #0f172a; border: 1px dashed var(--border-color); border-radius: 6px; width: 100%; height: 85px; }
-    </style>
+    /* =========================================================================
+       LEGEND & HAZARD ALERT
+       ========================================================================= */
+    .legend-box {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      font-size: 0.82rem;
+    }
+    .hazard-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 0.74rem;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .hazard-AA { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+    .hazard-A  { background: #fef3c7; color: #b45309; border: 1px solid #fcd34d; }
+
+    .stop-alert {
+      display: none;
+      background: #fef2f2;
+      border: 2px solid #dc2626;
+      color: #991b1b;
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      animation: pulseBorder 1.5s infinite;
+    }
+    .stop-alert.show { display: block; }
+    @keyframes pulseBorder {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.35); }
+      50% { box-shadow: 0 0 0 6px rgba(220, 38, 38, 0.12); }
+    }
+
+    /* =========================================================================
+       CHECKLIST & DATA TABLES
+       ========================================================================= */
+    .toolbar-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .toolbar-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-card {
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      background: #fff;
+    }
+    .section-head {
+      background: #e2e8f0;
+      color: #0f172a;
+      padding: 10px 14px;
+      font-weight: 800;
+      font-size: 0.89rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    table.p2h-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+    table.p2h-table th {
+      background: #f8fafc;
+      color: #334155;
+      font-weight: 700;
+      text-align: left;
+      padding: 10px 10px;
+      border-bottom: 2px solid #cbd5e1;
+      white-space: nowrap;
+    }
+    table.p2h-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: middle;
+    }
+    table.p2h-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    table.p2h-table tr.row-danger { background: #fef2f2; }
+    table.p2h-table tr.row-warn { background: #fffbeb; }
+
+    /* CONDITION PILLS */
+    .cond-group {
+      display: inline-flex;
+      gap: 6px;
+      flex-wrap: nowrap;
+    }
+    .cond-btn {
+      min-height: 34px;
+      padding: 5px 11px;
+      border: 1px solid #94a3b8;
+      border-radius: 6px;
+      background: #fff;
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+      color: #334155;
+      transition: all 0.14s;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .cond-btn:hover { border-color: var(--primary); }
+    .cond-btn.sel-B, .cond-btn.sel-NORMAL {
+      background: #15803d;
+      color: #fff;
+      border-color: #15803d;
+    }
+    .cond-btn.sel-KB {
+      background: #d97706;
+      color: #fff;
+      border-color: #d97706;
+    }
+    .cond-btn.sel-R, .cond-btn.sel-TIDAK_NORMAL {
+      background: #dc2626;
+      color: #fff;
+      border-color: #dc2626;
+    }
+    .note-input {
+      width: 100%;
+      min-height: 36px;
+      padding: 6px 9px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 0.84rem;
+      font-family: inherit;
+      background: #fff;
+      color: var(--text);
+    }
+    .note-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* =========================================================================
+       DIGITAL SIGNATURE PADS
+       ========================================================================= */
+    .sig-box {
+      border: 1px solid #94a3b8;
+      border-radius: 8px;
+      padding: 12px;
+      background: #f8fafc;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+    .sig-box h4 {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .sig-canvas-wrap {
+      background: #ffffff;
+      border: 1.5px dashed #64748b;
+      border-radius: 6px;
+      height: 126px;
+      width: 100%;
+      position: relative;
+      touch-action: none;
+      overflow: hidden;
+    }
+    .sig-canvas-wrap canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: crosshair;
+    }
+    .sig-footer {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      align-items: center;
+    }
+    .sig-footer input {
+      flex: 1;
+      min-width: 0;
+      min-height: 38px;
+      padding: 6px 9px;
+      border: 1px solid #94a3b8;
+      border-radius: 6px;
+      font-size: 0.84rem;
+      font-family: inherit;
+    }
+
+    /* =========================================================================
+       BUTTONS & ACTION BAR
+       ========================================================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 42px;
+      padding: 9px 16px;
+      border-radius: 7px;
+      border: none;
+      font-weight: 700;
+      font-size: 0.86rem;
+      cursor: pointer;
+      transition: all 0.16s;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn:disabled {
+      opacity: 0.68;
+      cursor: not-allowed;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover:not(:disabled) { background: var(--primary-light); }
+    .btn-success { background: #15803d; color: #fff; }
+    .btn-success:hover:not(:disabled) { background: #166534; }
+    .btn-accent { background: var(--accent); color: #fff; }
+    .btn-accent:hover:not(:disabled) { background: var(--accent-hover); }
+    .btn-danger { background: #dc2626; color: #fff; }
+    .btn-danger:hover:not(:disabled) { background: #b91c1c; }
+    .btn-outline {
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid #94a3b8;
+    }
+    .btn-outline:hover:not(:disabled) { background: #f1f5f9; }
+    .btn-sm {
+      min-height: 34px;
+      padding: 5px 11px;
+      font-size: 0.78rem;
+    }
+    .form-submit-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    /* =========================================================================
+       KPI CARDS
+       ========================================================================= */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .kpi-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--primary);
+      border-radius: 8px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+    }
+    .kpi-card.green { border-left-color: #15803d; }
+    .kpi-card.red { border-left-color: #dc2626; }
+    .kpi-card.amber { border-left-color: #d97706; }
+    .kpi-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; }
+    .kpi-val { font-size: 1.65rem; font-weight: 800; color: var(--text); margin-top: 4px; }
+
+    /* =========================================================================
+       UPLOAD PROGRESS OVERLAY ANIMATION (DESKTOP & HANDPHONE)
+       ========================================================================= */
+    .upload-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 31, 51, 0.72);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .upload-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .upload-modal {
+      background: #ffffff;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 410px;
+      padding: 26px 24px;
+      text-align: center;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.32);
+      border: 1px solid #e2e8f0;
+      transform: translateY(14px) scale(0.97);
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .upload-overlay.active .upload-modal {
+      transform: translateY(0) scale(1);
+    }
+    .upload-anim-stage {
+      position: relative;
+      width: 84px;
+      height: 84px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pulse-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 3px solid rgba(3, 105, 161, 0.35);
+      animation: pulseRipple 1.6s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+    }
+    .pulse-ring.delay {
+      animation-delay: 0.7s;
+    }
+    .upload-circle-core {
+      position: relative;
+      z-index: 2;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0f2942 0%, #0369a1 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 18px rgba(3, 105, 161, 0.35);
+      transition: background 0.3s ease;
+    }
+    .upload-modal.done .upload-circle-core {
+      background: linear-gradient(135deg, #15803d 0%, #22c55e 100%);
+      box-shadow: 0 8px 18px rgba(21, 128, 61, 0.35);
+    }
+    .upload-modal.done .pulse-ring {
+      border-color: rgba(34, 197, 94, 0.4);
+    }
+    .upload-modal.offline-mode .upload-circle-core {
+      background: linear-gradient(135deg, #b45309 0%, #f59e0b 100%);
+    }
+    .cloud-arrow-svg {
+      width: 30px;
+      height: 30px;
+    }
+    .arrow-up-anim {
+      animation: floatArrow 1.05s ease-in-out infinite;
+    }
+    .check-pop-anim {
+      animation: checkBounce 0.42s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    .upload-title {
+      font-size: 1.06rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+    .upload-subtitle {
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      min-height: 20px;
+    }
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #0f2942, #0284c7, #d97706, #0284c7);
+      background-size: 200% 100%;
+      animation: shimmerMove 1.4s linear infinite;
+      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .upload-modal.done .progress-fill {
+      background: #16a34a;
+      animation: none;
+    }
+    .upload-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #475569;
+    }
+
+    @keyframes spin360 {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulseRipple {
+      0% { transform: scale(0.75); opacity: 0.9; }
+      100% { transform: scale(1.38); opacity: 0; }
+    }
+    @keyframes floatArrow {
+      0%, 100% { transform: translateY(2px); }
+      50% { transform: translateY(-4px); }
+    }
+    @keyframes checkBounce {
+      0% { transform: scale(0.4); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes shimmerMove {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* =========================================================================
+       TOAST NOTIFICATION
+       ========================================================================= */
+    .toast {
+      position: fixed;
+      bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+      right: 18px;
+      background: #0f172a;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+      z-index: 9999;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: all 0.25s;
+      max-width: min(400px, calc(100vw - 32px));
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* =========================================================================
+       TABLET & HANDPHONE PRECISION BREAKPOINTS
+       ========================================================================= */
+    @media (max-width: 1024px) {
+      .grid-4, .grid-4.cols-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .app-header {
+        padding: 12px 14px;
+      }
+      .header-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .brand-box {
+        gap: 10px;
+      }
+      .logo-wrap {
+        height: 46px;
+        min-width: 106px;
+        padding: 4px 8px;
+      }
+      .logo-wrap img {
+        max-height: 36px;
+        max-width: 118px;
+      }
+      .brand-title h1 {
+        font-size: 1.02rem;
+      }
+      .brand-title p {
+        font-size: 0.74rem;
+      }
+      .sync-pill-area {
+        justify-content: space-between;
+        width: 100%;
+      }
+      .status-badge {
+        font-size: 0.73rem;
+        padding: 5px 10px;
+      }
+      .container {
+        margin: 12px auto;
+        padding: 0 10px;
+      }
+      .selector-panel, .card {
+        padding: 14px;
+        border-radius: 9px;
+      }
+      .legend-box, .grid-3, .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      /* Prevent iOS auto-zoom on form inputs/selects */
+      .custom-select,
+      .field-group input,
+      .field-group select,
+      .field-group textarea,
+      .note-input,
+      .sig-footer input {
+        font-size: 16px !important;
+      }
+      .sig-canvas-wrap {
+        height: 135px;
+      }
+      .toast {
+        left: 12px;
+        right: 12px;
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+        max-width: none;
+        text-align: center;
+      }
+    }
+
+    /* MOBILE CARD-TRANSFORM FOR CHECKLIST TABLE (ZERO HORIZONTAL SCROLL ON PHONE) */
+    @media (max-width: 720px) {
+      table.p2h-checklist-table,
+      table.p2h-checklist-table thead,
+      table.p2h-checklist-table tbody,
+      table.p2h-checklist-table tr,
+      table.p2h-checklist-table td {
+        display: block;
+        width: 100%;
+      }
+      table.p2h-checklist-table thead {
+        display: none;
+      }
+      table.p2h-checklist-table tr {
+        padding: 12px;
+        border-bottom: 1.5px solid #cbd5e1;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas:
+          "no name hazard"
+          "cond cond cond"
+          "note note note";
+        gap: 8px 8px;
+        align-items: center;
+      }
+      table.p2h-checklist-table tbody tr:last-child {
+        border-bottom: none;
+      }
+      table.p2h-checklist-table td {
+        padding: 0 !important;
+        border: none !important;
+        width: auto !important;
+      }
+      table.p2h-checklist-table td.col-no {
+        grid-area: no;
+        font-size: 0.85rem;
+        background: #e2e8f0;
+        color: #0f2942;
+        border-radius: 5px;
+        padding: 2px 7px !important;
+        text-align: center;
+      }
+      table.p2h-checklist-table td.col-name {
+        grid-area: name;
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: #0f172a;
+        line-height: 1.3;
+      }
+      table.p2h-checklist-table td.col-hazard {
+        grid-area: hazard;
+        text-align: right;
+      }
+      table.p2h-checklist-table td.col-cond {
+        grid-area: cond;
+        margin-top: 2px;
+      }
+      table.p2h-checklist-table td.col-cond .cond-group {
+        display: flex;
+        width: 100%;
+        gap: 8px;
+      }
+      table.p2h-checklist-table td.col-cond .cond-btn {
+        flex: 1;
+        min-height: 42px;
+        font-size: 0.84rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      table.p2h-checklist-table td.col-note {
+        grid-area: note;
+      }
+      table.p2h-checklist-table td.col-note .note-input {
+        min-height: 40px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .grid-4, .grid-4.cols-3 {
+        grid-template-columns: 1fr;
+      }
+      .nav-tabs {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+      .tab-btn {
+        justify-content: space-between;
+        padding: 10px 14px;
+      }
+      .banner-actions {
+        width: 100%;
+      }
+      .banner-actions .btn {
+        flex: 1;
+      }
+      .form-submit-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .form-submit-bar .btn {
+        width: 100%;
+        min-height: 48px;
+        font-size: 0.92rem;
+      }
+      .toolbar-controls {
+        width: 100%;
+      }
+      .toolbar-controls > * {
+        flex: 1 1 auto;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* =========================================================================
+       PRINT AREA (OFFICIAL A4 FORM)
+       ========================================================================= */
+    #printSheetArea { display: none; }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .app-header, .container, .toast, .upload-overlay { display: none !important; }
+      #printSheetArea {
+        display: block !important;
+        width: 100%;
+        font-family: Arial, sans-serif;
+        color: #000;
+        font-size: 10pt;
+      }
+      #printSheetArea table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+      #printSheetArea th, #printSheetArea td { border: 1px solid #000; padding: 3px 5px; font-size: 8.5pt; }
+      #printSheetArea th { background: #e5e7eb !important; -webkit-print-color-adjust: exact; }
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <!-- Logo SKU dari Google Drive Direct Image URL -->
-        <img src="https://lh3.googleusercontent.com/d/150NvhVJVrOsMrt2e8vDCaf0pucfg0Z1P" alt="Logo PT. SKU" class="header-logo">
-        <div class="brand">
-            <h1>P2H MOBILE — PT. SKU</h1>
-            <p>Database Online Google Sheets</p>
+  <!-- HEADER SPT GROUP -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-box">
+        <div class="logo-wrap" id="logoContainer">
+          <img
+            id="sptLogoImg"
+            src="https://lh3.googleusercontent.com/d/1cOiou-d82BDK1Rm7ZynjUt15ZUHrG70D=w600"
+            alt="SPT Group Logo"
+            onload="handleLogoLoad()"
+            onerror="handleLogoError(this)"
+          />
+          <div id="sptSvgFallback" style="display:none; align-items:center; gap:6px;">
+            <svg width="115" height="40" viewBox="0 0 220 75" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="36" cy="37" r="30" fill="#dc2626"/>
+              <path d="M16 25 Q36 10 56 25 Q36 35 16 25 Z" fill="#fff"/>
+              <path d="M16 48 Q36 33 56 48 Q36 58 16 48 Z" fill="#fff"/>
+              <polygon points="110,8 78,56 142,56" fill="none" stroke="#dc2626" stroke-width="8"/>
+              <line x1="76" y1="56" x2="144" y2="56" stroke="#1d4ed8" stroke-width="8"/>
+              <path d="M68 62 Q110 34 155 42 Q110 44 74 68 Z" fill="#ea580c"/>
+              <circle cx="182" cy="37" r="28" fill="none" stroke="#16a34a" stroke-width="6"/>
+              <path d="M174 14 Q188 37 174 60" stroke="#0284c7" stroke-width="5" fill="none"/>
+              <path d="M184 14 Q198 37 184 60" stroke="#eab308" stroke-width="5" fill="none"/>
+              <path d="M194 18 Q206 37 194 56" stroke="#dc2626" stroke-width="4" fill="none"/>
+            </svg>
+          </div>
         </div>
-    </header>
-
-    <div class="container">
-        <div id="statusBanner" class="status-banner status-ready">READY TO OPERATE</div>
-
-        <!-- Identitas Operasional -->
-        <div class="card">
-            <div class="card-title"><i class="fa-solid fa-id-card"></i> Identitas Operasional</div>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Tanggal & Jam</label>
-                    <input type="datetime-local" id="opDateTime">
-                </div>
-                <div class="form-group">
-                    <label>Shift</label>
-                    <select id="shift">
-                        <option value="Shift 1 (Siang)">Shift 1 (Siang)</option>
-                        <option value="Shift 2 (Malam)">Shift 2 (Malam)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Kode Unit</label>
-                    <input type="text" id="unitCode" placeholder="LV-042 / DT-118">
-                </div>
-                <div class="form-group">
-                    <label>Jenis Unit</label>
-                    <select id="unitType">
-                        <option value="Light Vehicle (LV)">Light Vehicle (LV)</option>
-                        <option value="Dump Truck (DT)">Dump Truck (DT)</option>
-                        <option value="Excavator (EX)">Excavator (EX)</option>
-                        <option value="Support Unit">Support Unit</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Nama Driver</label>
-                    <input type="text" id="driverName" placeholder="Nama Lengkap">
-                </div>
-                <div class="form-group">
-                    <label>No. Badge / NIK</label>
-                    <input type="text" id="badgeNo" placeholder="OPR-8821">
-                </div>
-                <div class="form-group">
-                    <label>KM / HM Awal</label>
-                    <input type="text" id="hmStart" placeholder="124,580 KM">
-                </div>
-                <div class="form-group">
-                    <label>Lokasi / Pit</label>
-                    <input type="text" id="locationPit" placeholder="Pit North Bench 3">
-                </div>
-            </div>
+        <div class="brand-title">
+          <h1>SPT GROUP — P2H &amp; PEMELIHARAAN UNIT</h1>
+          <p>Project Pertambangan Bauksit Site-Kuala Labai &amp; Simpang Hulu</p>
         </div>
+      </div>
 
-        <!-- Critical Items -->
-        <div class="card">
-            <div class="card-title"><i class="fa-solid fa-triangle-exclamation"></i> Critical Safety Items</div>
-            
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">Rem Utama & Handbrake</span><span class="badge-crit">CRITICAL</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'rem', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'rem', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'rem', 'N/A')">N/A</div>
-                </div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">Kemudi & Steering System</span><span class="badge-crit">CRITICAL</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'kemudi', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'kemudi', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'kemudi', 'N/A')">N/A</div>
-                </div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">Rotator & Buggy Whip</span><span class="badge-crit">CRITICAL</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'rotator', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'rotator', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'rotator', 'N/A')">N/A</div>
-                </div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">Radio Komunikasi 2-Way</span><span class="badge-crit">CRITICAL</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'radio', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'radio', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'radio', 'N/A')">N/A</div>
-                </div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">APAR</span><span class="badge-crit">CRITICAL</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'apar', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'apar', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'apar', 'N/A')">N/A</div>
-                </div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">Sabuk Pengaman (Seatbelt)</span><span class="badge-crit">CRITICAL</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'seatbelt', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'seatbelt', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'seatbelt', 'N/A')">N/A</div>
-                </div>
-            </div>
+      <div class="sync-pill-area">
+        <div class="status-badge" id="networkBadge">
+          <span class="dot online" id="netDot"></span>
+          <span class="mini-spinner" id="netSpinner" style="display:none;"></span>
+          <span id="netText">Online — Server Terhubung</span>
         </div>
-
-        <!-- Mechanical Items -->
-        <div class="card">
-            <div class="card-title"><i class="fa-solid fa-wrench"></i> Mekanis Umum</div>
-
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">Ban & Mur Roda</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'ban', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'ban', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'ban', 'N/A')">N/A</div>
-                </div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">Lampu Utama & Sein</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'lampu', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'lampu', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'lampu', 'N/A')">N/A</div>
-                </div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">Spion & Wiper</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'spion', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'spion', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'spion', 'N/A')">N/A</div>
-                </div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">Klakson & Alarm Mundur</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'klakson', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'klakson', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'klakson', 'N/A')">N/A</div>
-                </div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">Level Oli & Air Radiator</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'oliRadiator', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'oliRadiator', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'oliRadiator', 'N/A')">N/A</div>
-                </div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">Level Minyak Rem/Steering</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'minyakRem', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'minyakRem', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'minyakRem', 'N/A')">N/A</div>
-                </div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">Kebocoran Fluid</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'kebocoran', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'kebocoran', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'kebocoran', 'N/A')">N/A</div>
-                </div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">Body & Chassis</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'bodyChassis', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'bodyChassis', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'bodyChassis', 'N/A')">N/A</div>
-                </div>
-            </div>
-
-            <div class="item-row">
-                <div class="item-info"><span class="item-name">Kotak P3K & Segitiga</span></div>
-                <div class="btn-group">
-                    <div class="btn-opt baik active" onclick="setCheck(this, 'p3k', 'BAIK')">BAIK</div>
-                    <div class="btn-opt rusak" onclick="setCheck(this, 'p3k', 'RUSAK')">RUSAK</div>
-                    <div class="btn-opt na" onclick="setCheck(this, 'p3k', 'N/A')">N/A</div>
-                </div>
-            </div>
+        <div class="status-badge" id="queueBadge">
+          <span>Antrean Kirim: <strong id="queueCountText">0</strong></span>
         </div>
-
-        <!-- Foto Kendaraan -->
-        <div class="card">
-            <div class="card-title"><i class="fa-solid fa-camera"></i> Ambil Foto Kendaraan</div>
-            <div class="photo-box" onclick="document.getElementById('cameraInput').click()">
-                <i class="fa-solid fa-camera-retro"></i>
-                <p>Klik untuk Ambil / Upload Foto Unit</p>
-                <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;" onchange="previewPhoto(event)">
-            </div>
-            <img id="photoPreview" alt="Preview Foto Unit">
-        </div>
-
-        <!-- Catatan & Pengesahan -->
-        <div class="card">
-            <div class="card-title"><i class="fa-solid fa-pen-nib"></i> Catatan & Pengesahan</div>
-            <div class="form-group full" style="margin-bottom: 8px;">
-                <label>Catatan Kerusakan (Remarks)</label>
-                <textarea id="remarks" rows="2" placeholder="Tuliskan kendala jika ada..."></textarea>
-            </div>
-            
-            <div class="form-grid" style="margin-bottom: 8px;">
-                <div class="form-group">
-                    <label>Supervisor / Foreperson</label>
-                    <input type="text" id="supervisorName" placeholder="Nama Supervisor">
-                </div>
-                <div class="form-group">
-                    <label>Approval Supervisor</label>
-                    <select id="supervisorApproval">
-                        <option value="APPROVED">APPROVED</option>
-                        <option value="PENDING">PENDING</option>
-                        <option value="REJECTED">REJECTED</option>
-                    </select>
-                </div>
-            </div>
-
-            <label style="margin-bottom:4px; display:block;">Tanda Tangan Driver</label>
-            <canvas id="sigCanvas"></canvas>
-            <button style="background:transparent; border:none; color:var(--text-muted); font-size:0.72rem; margin-top:4px; cursor:pointer;" onclick="clearCanvas()">Clear Signature</button>
-        </div>
-
-        <button id="submitBtn" class="submit-btn" onclick="submitForm()"><i class="fa-solid fa-paper-plane"></i> Kirim Laporan ke Google Sheet</button>
+      </div>
     </div>
+  </header>
 
-    <!-- Bottom Nav -->
-    <div class="bottom-nav">
-        <a href="#" class="nav-item"><i class="fa-solid fa-clipboard-check"></i> Form P2H Mobile</a>
+  <main class="container">
+    <!-- TOP SELECTORS: PERUSAHAAN ATAS, JENIS KENDARAAN BAWAH (DROPDOWN) -->
+    <section class="selector-panel">
+      <div class="selector-stack">
+        <!-- ROW 1: PERUSAHAAN -->
+        <div class="selector-row">
+          <div class="selector-label">
+            <span>1. Pilih Perusahaan Kontraktor / Pemilik Unit</span>
+            <span class="selector-tag" id="companyFullBadge">PT Sandai Persada Tambang</span>
+          </div>
+          <select id="companyDropdown" class="custom-select" onchange="onCompanyChange()">
+            <option value="PT SPT">PT SPT — PT Sandai Persada Tambang</option>
+            <option value="PT SKU">PT SKU — PT Sandai Kemakmuran Utama</option>
+            <option value="PT LPT">PT LPT — PT Labai Persada Tambang</option>
+            <option value="PT BMI">PT BMI — PT Berseri Makmur Indonesia</option>
+            <option value="PT UMUB">PT UMUB — PT Ultra Modern Untung Bersama</option>
+          </select>
+        </div>
+
+        <!-- ROW 2: JENIS KENDARAAN -->
+        <div class="selector-row">
+          <div class="selector-label">
+            <span>2. Pilih Jenis Kendaraan / Alat Berat</span>
+            <span class="selector-tag" id="vehicleMetaBadge">20 Item Pemeriksaan • Form LV</span>
+          </div>
+          <select id="vehicleDropdown" class="custom-select" onchange="onVehicleChange()">
+            <option value="Light Vehicle">Light Vehicle (LV) — Mobil Sarana / Operasional (20 Item)</option>
+            <option value="Dump Truck">Dump Truck (DT) — Hauling Ore / Overburden (36 Item)</option>
+            <option value="Excavator">Excavator (EX) — Digging &amp; Loading Unit (33 Item)</option>
+            <option value="Bulldozer">Bulldozer (BD) — Land Clearing &amp; Ripping (33 Item)</option>
+            <option value="Grader">Grader (GD) — Road Maintenance &amp; Grading (41 Item)</option>
+            <option value="Wheel Loader">Wheel Loader (WL) — Stockpile &amp; Loading (41 Item)</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAVIGATION TABS (3 TABS PRECISION EQUAL GRID) -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="tabForm" onclick="switchTab('tabForm')">
+        <span>📋 Form Pemeriksaan P2H</span>
+      </button>
+      <button class="tab-btn" data-tab="tabMaintenance" onclick="switchTab('tabMaintenance')">
+        <span>🔧 Monitoring Pemeliharaan &amp; WO</span>
+        <span class="tab-badge" id="openWoBadge">0</span>
+      </button>
+      <button class="tab-btn" data-tab="tabHistory" onclick="switchTab('tabHistory')">
+        <span>🗂️ Riwayat P2H &amp; Cetak Resmi</span>
+        <span class="tab-badge" id="historyBadge">0</span>
+      </button>
+    </nav>
+
+    <!-- ==================== TAB 1: FORM PEMERIKSAAN P2H ==================== -->
+    <section id="tabForm" class="tab-pane active">
+      <div class="card">
+        <div class="doc-banner">
+          <div>
+            <h2 id="formDocTitle">PELAKSANAAN PERAWATAN HARIAN (P2H) — LIGHT VEHICLE (LV)</h2>
+            <span id="formDocSub">SPT GROUP • Perusahaan: PT SPT (PT Sandai Persada Tambang) • Site-Kuala Labai / Simpang Hulu</span>
+          </div>
+          <div class="banner-actions">
+            <button type="button" class="btn btn-outline btn-sm" onclick="markAllGood()">✓ Tandai Semua Baik / Normal</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="resetForm()">↺ Reset Form</button>
+          </div>
+        </div>
+
+        <!-- IDENTITY FIELDS -->
+        <div class="grid-4" id="identityRow1" style="margin-bottom: 12px;">
+          <div class="field-group">
+            <label for="inpNama">Nama Driver / Operator *</label>
+            <input type="text" id="inpNama" placeholder="Nama lengkap operator/driver" />
+          </div>
+          <div class="field-group" id="grpNik">
+            <label for="inpNik">NIK Karyawan</label>
+            <input type="text" id="inpNik" placeholder="Contoh: SPT-2026-041" />
+          </div>
+          <div class="field-group">
+            <label for="inpTanggal">Hari / Tanggal *</label>
+            <input type="date" id="inpTanggal" />
+          </div>
+          <div class="field-group">
+            <label for="inpShift">Shift Kerja *</label>
+            <select id="inpShift">
+              <option value="Shift 1 (Siang)">Shift 1 (Siang / 06:30 - 18:30)</option>
+              <option value="Shift 2 (Malam)">Shift 2 (Malam / 18:30 - 06:30)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-4" id="identityRow2" style="margin-bottom: 12px;">
+          <div class="field-group">
+            <label for="inpLokasi">Lokasi Kerja / Jobsite *</label>
+            <input type="text" id="inpLokasi" value="Site-Kuala Labai / PT SKU Simpang Hulu" />
+          </div>
+          <div class="field-group">
+            <label for="inpTypeUnit">Type Unit *</label>
+            <input type="text" id="inpTypeUnit" placeholder="Contoh: Toyota Hilux 4x4 / Hino FM260" />
+          </div>
+          <div class="field-group">
+            <label for="inpNoUnit">No. Unit / Nomor Lambung *</label>
+            <input type="text" id="inpNoUnit" placeholder="Contoh: LV-01 / DT-12 / EX-05" />
+          </div>
+          <div class="field-group" id="grpKegiatan">
+            <label for="inpKegiatan">Jenis Kegiatan</label>
+            <input type="text" id="inpKegiatan" placeholder="Contoh: Operasional Pit &amp; Hauling" />
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-bottom: 14px;">
+          <div class="field-group">
+            <label for="inpHmAwal">HM / KM Awal *</label>
+            <input type="number" step="0.1" inputmode="decimal" id="inpHmAwal" placeholder="0.0" oninput="calcTotalHm()" />
+          </div>
+          <div class="field-group">
+            <label for="inpHmAkhir">HM / KM Akhir</label>
+            <input type="number" step="0.1" inputmode="decimal" id="inpHmAkhir" placeholder="0.0" oninput="calcTotalHm()" />
+          </div>
+          <div class="field-group">
+            <label for="inpTotalHm">Total HM / KM (Otomatis)</label>
+            <input type="text" id="inpTotalHm" readonly value="0.0" />
+          </div>
+        </div>
+
+        <!-- LEGEND & WARNING RULES -->
+        <div class="legend-box">
+          <div id="conditionLegendText">
+            <strong>Keterangan Kondisi:</strong><br/>
+            • <strong>NORMAL</strong> = Kondisi Baik / Layak Operasi<br/>
+            • <strong>TIDAK NORMAL</strong> = Kondisi Rusak / Perlu Perbaikan
+          </div>
+          <div>
+            <strong>Warning Kode Bahaya (SOP Keselamatan Tambang):</strong><br/>
+            • <span class="hazard-pill hazard-AA">AA</span> = Unit <strong>STOP OPERASI</strong> — wajib diperbaiki segera sebelum digunakan &amp; dibuatkan Work Order PLTs.<br/>
+            • <span class="hazard-pill hazard-A">A</span> = Kerusakan wajib diperbaiki dalam waktu <strong>1 x 12 Jam (dalam 1 Shift)</strong>.
+          </div>
+        </div>
+
+        <!-- DYNAMIC STOP OPERASI ALERT BANNER -->
+        <div id="stopOperasiAlert" class="stop-alert">
+          <div style="font-weight:800; font-size:0.96rem; margin-bottom:4px;">
+            🚨 PERINGATAN STOP OPERASI — TERDETEKSI KERUSAKAN KODE BAHAYA AA!
+          </div>
+          <div id="stopOperasiList" style="font-size:0.84rem;"></div>
+          <div style="font-size:0.8rem; margin-top:6px; font-weight:700;">
+            Sesuai peraturan keselamatan SPT Group: Unit DILARANG DIOPERASIKAN sebelum diperbaiki. Sistem akan otomatis menerbitkan Work Order (WO) Pemeliharaan saat form disimpan.
+          </div>
+        </div>
+
+        <!-- CHECKLIST SECTIONS CONTAINER -->
+        <div id="checklistSectionsContainer"></div>
+
+        <!-- KERUSAKAN TAMBAHAN (5 BARIS SESUAI FORM) -->
+        <div class="section-card" id="extraDefectsCard">
+          <div class="section-head">
+            <span>*Jika ada kerusakan yang ditemukan dan tidak tercantum pada kolom di atas, silakan tulis di bawah ini:</span>
+          </div>
+          <div style="padding:12px; display:flex; flex-direction:column; gap:8px;">
+            <input type="text" class="note-input extra-defect" placeholder="1. Catatan temuan kerusakan tambahan..." />
+            <input type="text" class="note-input extra-defect" placeholder="2. Catatan temuan kerusakan tambahan..." />
+            <input type="text" class="note-input extra-defect" placeholder="3. Catatan temuan kerusakan tambahan..." />
+            <input type="text" class="note-input extra-defect" placeholder="4. Catatan temuan kerusakan tambahan..." />
+            <input type="text" class="note-input extra-defect" placeholder="5. Catatan temuan kerusakan tambahan..." />
+          </div>
+        </div>
+
+        <!-- DIGITAL SIGNATURES (DYNAMIC 2-COLUMN OR 3-COLUMN FOR LV) -->
+        <div class="section-card">
+          <div class="section-head">
+            <span>Pengesahan &amp; Tanda Tangan Digital</span>
+            <span style="font-size:0.76rem; font-weight:600; color:#475569;">Gunakan mouse atau layar sentuh untuk tanda tangan</span>
+          </div>
+          <div style="padding:14px;" id="signaturesContainer"></div>
+        </div>
+
+        <!-- FOOTER SOP NOTES -->
+        <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:12px 14px; font-size:0.8rem; color:#334155; margin-bottom:16px;" id="sopNotesBox"></div>
+
+        <!-- SUBMIT ACTIONS -->
+        <div class="form-submit-bar">
+          <button type="button" class="btn btn-outline" onclick="printCurrentDraft()">🖨️ Pratinjau Cetak Form</button>
+          <button type="button" class="btn btn-success" id="btnSubmitP2h" onclick="submitP2HForm()">
+            💾 Simpan &amp; Kirim Laporan P2H
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: MONITORING PEMELIHARAAN & WORK ORDER ==================== -->
+    <section id="tabMaintenance" class="tab-pane">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Total Inspeksi P2H</div>
+          <div class="kpi-val" id="kpiTotalP2h">0</div>
+        </div>
+        <div class="kpi-card green">
+          <div class="kpi-label">Unit Laik Operasi</div>
+          <div class="kpi-val" id="kpiLaik">0</div>
+        </div>
+        <div class="kpi-card red">
+          <div class="kpi-label">Unit Stop Operasi (AA)</div>
+          <div class="kpi-val" id="kpiStop">0</div>
+        </div>
+        <div class="kpi-card amber">
+          <div class="kpi-label">Work Order (WO) Terbuka</div>
+          <div class="kpi-val" id="kpiOpenWo">0</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar-row">
+          <h3 style="font-size:1rem; color:var(--primary);">Daftar Work Order (WO) &amp; Tindak Lanjut Pemeliharaan Unit</h3>
+          <div class="toolbar-controls">
+            <select id="filterWoStatus" class="note-input" style="width:auto;" onchange="renderWorkOrders()">
+              <option value="ALL">Semua Status WO</option>
+              <option value="OPEN">OPEN (Menunggu Perbaikan)</option>
+              <option value="IN PROGRESS">IN PROGRESS (Sedang Dikerjakan)</option>
+              <option value="CLOSED">CLOSED (Selesai / Laik Operasi)</option>
+            </select>
+            <button type="button" class="btn btn-outline btn-sm" onclick="exportWoCsv()">📥 Export WO (.CSV)</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="p2h-table">
+            <thead>
+              <tr>
+                <th>No. WO</th>
+                <th>Tanggal</th>
+                <th>Perusahaan</th>
+                <th>Unit &amp; Jenis</th>
+                <th>Bahaya</th>
+                <th>Daftar Temuan Kerusakan</th>
+                <th>Status WO</th>
+                <th>Aksi Mekanik / PLTs</th>
+              </tr>
+            </thead>
+            <tbody id="woTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: RIWAYAT P2H & CETAK RESMI ==================== -->
+    <section id="tabHistory" class="tab-pane">
+      <div class="card">
+        <div class="toolbar-row">
+          <h3 style="font-size:1rem; color:var(--primary);">Arsip Pemeriksaan Harian (P2H) SPT Group</h3>
+          <div class="toolbar-controls">
+            <input type="text" id="searchHistory" class="note-input" placeholder="Cari No. Unit / Operator / Perusahaan..." oninput="renderHistory()" />
+            <button type="button" class="btn btn-primary btn-sm" onclick="flushOfflineQueue(false)">📤 Kirim Ulang Antrean</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="exportP2hCsv()">📥 Export P2H (.CSV)</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="p2h-table">
+            <thead>
+              <tr>
+                <th>ID P2H</th>
+                <th>Tanggal &amp; Shift</th>
+                <th>Perusahaan</th>
+                <th>Jenis &amp; No. Unit</th>
+                <th>Operator / Driver</th>
+                <th>HM/KM</th>
+                <th>Status Unit</th>
+                <th>Status Kirim</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- UPLOAD ANIMATION OVERLAY -->
+  <div id="uploadOverlay" class="upload-overlay" role="dialog" aria-modal="true" aria-labelledby="uploadTitle">
+    <div class="upload-modal" id="uploadModalBox">
+      <div class="upload-anim-stage">
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring delay"></div>
+        <div class="upload-circle-core" id="uploadIconCore">
+          <!-- Cloud Upload Icon (Active State) -->
+          <svg id="svgUploadingIcon" class="cloud-arrow-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+            <g class="arrow-up-anim">
+              <path d="M12 16V9"/>
+              <path d="m9 12 3-3 3 3"/>
+            </g>
+          </svg>
+          <!-- Checkmark Icon (Success State) -->
+          <svg id="svgSuccessIcon" class="cloud-arrow-svg check-pop-anim" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5"/>
+          </svg>
+        </div>
+      </div>
+      <div class="upload-title" id="uploadTitle">Mengunggah Data P2H...</div>
+      <div class="upload-subtitle" id="uploadSubtitle">Menghubungkan ke Server Database SPT Group</div>
+      <div class="progress-track">
+        <div class="progress-fill" id="uploadProgressBar"></div>
+      </div>
+      <div class="upload-meta-row">
+        <span id="uploadStepLabel">Inisialisasi pengiriman...</span>
+        <span id="uploadPercentText">0%</span>
+      </div>
     </div>
+  </div>
 
-    <script>
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyp7F37lwYf6sFqX7xU0jNuI4BVKoqgUb4lE2HB0gIGwTvxPO01gBjiyZuV5Dsy6oEShQ/exec";
+  <!-- PRINT SHEET AREA -->
+  <div id="printSheetArea"></div>
 
-        let photoBase64 = "";
-        const checks = {
-            rem: 'BAIK', kemudi: 'BAIK', rotator: 'BAIK', radio: 'BAIK', apar: 'BAIK', seatbelt: 'BAIK',
-            ban: 'BAIK', lampu: 'BAIK', spion: 'BAIK', klakson: 'BAIK', oliRadiator: 'BAIK',
-            minyakRem: 'BAIK', kebocoran: 'BAIK', bodyChassis: 'BAIK', p3k: 'BAIK'
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast"></div>
+
+  <script>
+    /* =========================================================================
+       0. EMBEDDED GOOGLE APPS SCRIPT WEB APP ENDPOINT (1-ARAH PRESISI 57 KOLOM)
+       ========================================================================= */
+    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyAvBQaKL_Cn814-L36naZB84ZyAfKtOgUMUq7L5RfYVhK0z4UAIfDcndHt9Bhf0kxk/exec";
+
+    /* =========================================================================
+       1. MASTER DATA PERUSAHAAN & 6 FORM P2H SESUAI DOKUMEN RESMI
+       ========================================================================= */
+    const COMPANIES = {
+      "PT SPT":  { code: "PT SPT",  full: "PT Sandai Persada Tambang" },
+      "PT SKU":  { code: "PT SKU",  full: "PT Sandai Kemakmuran Utama" },
+      "PT LPT":  { code: "PT LPT",  full: "PT Labai Persada Tambang" },
+      "PT BMI":  { code: "PT BMI",  full: "PT Berseri Makmur Indonesia" },
+      "PT UMUB": { code: "PT UMUB", full: "PT Ultra Modern Untung Bersama" }
+    };
+
+    const P2H_TEMPLATES = {
+      "Light Vehicle": {
+        code: "LV",
+        title: "PELAKSANAAN PERAWATAN HARIAN (P2H) — MOBIL LIGHT VEHICLE (LV)",
+        mode: "LV",
+        sigRoles: ["Dibuat Oleh (Driver)", "Diperiksa Oleh (Maintenance)", "Diketahui Oleh (Supervisor)"],
+        sopNotes: [
+          "1. Kode bahaya AA = Unit harus diperbaiki sebelum dioperasikan (STOP OPERASI). Kode bahaya A = Kerusakan yang harus diperbaiki dalam waktu 1 x 12 jam.",
+          "2. P2H harus diserahkan ke foreman di awal shift dan dilengkapi dengan tanda tangan.",
+          "3. Mengoperasikan alat dengan kerusakan kode bahaya AA akan dikenai sanksi sesuai Peraturan Perusahaan (PP).",
+          "4. Kode bahaya AA akan langsung dilaporkan ke PLTs untuk ditindaklanjuti.",
+          "5. PLTs wajib membuat Work Order jika terdapat kerusakan dengan kategori bahaya AA."
+        ],
+        sections: [
+          {
+            code: "A",
+            title: "PEMERIKSAAN KELILING UNIT / DI LUAR KABIN",
+            items: [
+              { no: 1, name: "Ban dan Baut Roda", hazard: "AA" },
+              { no: 2, name: "Oli Mesin", hazard: "AA" },
+              { no: 3, name: "Kerusakan Akibat Insiden", hazard: "AA" },
+              { no: 4, name: "Air Radiator", hazard: "A" },
+              { no: 5, name: "Oli Transmisi", hazard: "A" },
+              { no: 6, name: "Oli Power Steering", hazard: "A" },
+              { no: 7, name: "Cairan Rem", hazard: "A" },
+              { no: 8, name: "Kebersihan Alat", hazard: "A" },
+              { no: 9, name: "Kelainan Saat Operasi Sebelumnya", hazard: "A" }
+            ]
+          },
+          {
+            code: "B",
+            title: "PEMERIKSAAN DALAM KABIN",
+            items: [
+              { no: 1, name: "Fungsi Rem (Kaki & Tangan)", hazard: "AA" },
+              { no: 2, name: "Fungsi Steering", hazard: "AA" },
+              { no: 3, name: "Fungsi Seat Belt", hazard: "AA" },
+              { no: 4, name: "Lampu (Depan, Belakang, Sein, Rem)", hazard: "AA" },
+              { no: 5, name: "Fungsi Mirror (Spion)", hazard: "AA" },
+              { no: 6, name: "Kebersihan Ruang Kabin", hazard: "A" },
+              { no: 7, name: "Klakson", hazard: "A" },
+              { no: 8, name: "Wiper dan Air Wiper", hazard: "A" },
+              { no: 9, name: "Alat Pemadam Api Ringan (APAR)", hazard: "A" },
+              { no: 10, name: "Control Panel dan Indikator", hazard: "A" },
+              { no: 11, name: "Radio Komunikasi", hazard: "A" }
+            ]
+          }
+        ]
+      },
+
+      "Dump Truck": {
+        code: "DT",
+        title: "PEMERIKSAAN DAN PERAWATAN HARIAN (P2H) DUMP TRUCK (DT)",
+        mode: "HEAVY",
+        sigRoles: ["Driver / Operator", "Foreman / Pengawas"],
+        sopNotes: [
+          "1. P2H harus dilakukan setiap awal Shift dan ditandatangani Pengawas/Atasan. Form diserahkan setiap akhir shift.",
+          "2. Mengoperasikan unit dengan kerusakan AA dan Tidak melakukan P2H akan dikenai Sanksi sesuai Peraturan Keselamatan yang berlaku."
+        ],
+        sections: [
+          {
+            code: "A",
+            title: "Pemeriksaan Dalam Ruang Mesin",
+            items: [
+              { no: 1, name: "Oli engine", hazard: "AA" },
+              { no: 2, name: "Air radiator", hazard: "AA" },
+              { no: 3, name: "Level Oli stering", hazard: "AA" },
+              { no: 4, name: "Level Oli Rem", hazard: "AA" },
+              { no: 5, name: "Semua Tali Kipas (Fan belt)", hazard: "AA" }
+            ]
+          },
+          {
+            code: "B",
+            title: "Pemeriksaan Luar Kabin (Keliling Unit)",
+            items: [
+              { no: 1, name: "Kabin, Body dan Dump/Vessel", hazard: "AA" },
+              { no: 2, name: "Kaca depan, samping & belakang", hazard: "AA" },
+              { no: 3, name: "Fisik Ban", hazard: "AA" },
+              { no: 4, name: "Baut Roda", hazard: "AA" },
+              { no: 5, name: "Aki (Tidak drop/bocor/asam berlebih)", hazard: "AA" },
+              { no: 6, name: "Oli Transmisi (Tidak Bocor)", hazard: "AA" },
+              { no: 7, name: "Tangki Bahan Bakar (Tidak Bocor)", hazard: "AA" },
+              { no: 8, name: "Nomor Lambung", hazard: "A" },
+              { no: 9, name: "Suspensi Unit", hazard: "A" },
+              { no: 10, name: "Kebersihan Luar unit", hazard: "A" }
+            ]
+          },
+          {
+            code: "C",
+            title: "Pemeriksaan Dalam Kabin",
+            items: [
+              { no: 1, name: "Fungsi Kontrol Panel", hazard: "AA" },
+              { no: 2, name: "Fungsi Lampu Depan", hazard: "AA" },
+              { no: 3, name: "Fungsi Lampu Belakang", hazard: "AA" },
+              { no: 4, name: "Fungsi lampu Sein", hazard: "AA" },
+              { no: 5, name: "Fungsi Kaca spion", hazard: "AA" },
+              { no: 6, name: "Fungsi Klakson", hazard: "AA" },
+              { no: 7, name: "Fungsi Wipper & Air", hazard: "AA" },
+              { no: 8, name: "Fungsi Lampu Rotary", hazard: "AA" },
+              { no: 9, name: "Fungsi Double Gardan (4WD)", hazard: "AA" },
+              { no: 10, name: "Fungsi Rem Kaki", hazard: "AA" },
+              { no: 11, name: "Fungsi Rem Tangan", hazard: "AA" },
+              { no: 12, name: "Fungsi Stering/Kemudi", hazard: "AA" },
+              { no: 13, name: "Fungsi Alarm Mundur", hazard: "AA" },
+              { no: 14, name: "Sabuk Pengaman", hazard: "AA" },
+              { no: 15, name: "Sistem Dumping", hazard: "AA" },
+              { no: 16, name: "Sistem Transmisi", hazard: "AA" },
+              { no: 17, name: "Fungsi Air Conditioner (AC)", hazard: "A" },
+              { no: 18, name: "Fungsi Radio & Chanal", hazard: "A" },
+              { no: 19, name: "APAR", hazard: "A" },
+              { no: 20, name: "Kotak dan Isi P3K", hazard: "A" },
+              { no: 21, name: "Kebersihan Ruang Kabin", hazard: "A" }
+            ]
+          }
+        ]
+      },
+
+      "Excavator": {
+        code: "EX",
+        title: "PEMERIKSAAN DAN PERAWATAN HARIAN (P2H) EXCAVATOR",
+        mode: "HEAVY",
+        sigRoles: ["Operator", "Foreman / Pengawas"],
+        sopNotes: [
+          "1. P2H harus dilakukan setiap awal Shift dan ditandatangani Pengawas/Atasan. Form diserahkan setiap akhir shift.",
+          "2. Mengoperasikan unit dengan kerusakan AA dan Tidak melakukan P2H akan dikenai Sanksi sesuai Peraturan Keselamatan yang berlaku."
+        ],
+        sections: [
+          {
+            code: "A",
+            title: "Pemeriksaan Dalam Ruang Mesin",
+            items: [
+              { no: 1, name: "Oli engine", hazard: "AA" },
+              { no: 2, name: "Air radiator", hazard: "AA" },
+              { no: 3, name: "Oli Hidrolik, Transmisi", hazard: "AA" },
+              { no: 4, name: "Aki (Tidak drop/bocor/asam berlebih)", hazard: "AA" },
+              { no: 5, name: "Kebersihan Ruang Mesin", hazard: "AA" },
+              { no: 6, name: "Semua Tali Kipas (Fan belt)", hazard: "A" }
+            ]
+          },
+          {
+            code: "B",
+            title: "Pemeriksaan Luar Kabin (Keliling Unit)",
+            items: [
+              { no: 1, name: "Kabin dan Bodi", hazard: "AA" },
+              { no: 2, name: "Kaca depan, samping & belakang", hazard: "AA" },
+              { no: 3, name: "Fisik Track", hazard: "AA" },
+              { no: 4, name: "Baut Track", hazard: "AA" },
+              { no: 5, name: "Komponen Undercarriage", hazard: "AA" },
+              { no: 6, name: "Komponen Attachment (bucket, arm)", hazard: "AA" },
+              { no: 7, name: "Tangki Bahan Bakar (Tidak Bocor)", hazard: "AA" },
+              { no: 8, name: "Fungsi Emergency Stop", hazard: "AA" },
+              { no: 9, name: "Alat Pemadam Api Ringan (APAR)", hazard: "A" },
+              { no: 10, name: "Nomor Lambung", hazard: "A" },
+              { no: 11, name: "Scothlight Keliling Kabin Unit", hazard: "A" },
+              { no: 12, name: "Kebersihan Luar unit", hazard: "A" }
+            ]
+          },
+          {
+            code: "C",
+            title: "Pemeriksaan Dalam Kabin",
+            items: [
+              { no: 1, name: "Fungsi Kontrol Panel", hazard: "AA" },
+              { no: 2, name: "Fungsi Lampu Kerja", hazard: "AA" },
+              { no: 3, name: "Fungsi Lampu Rotary", hazard: "AA" },
+              { no: 4, name: "Fungsi Kaca spion", hazard: "AA" },
+              { no: 5, name: "Fungsi Klakson", hazard: "AA" },
+              { no: 6, name: "Fungsi Wipper & Air", hazard: "AA" },
+              { no: 7, name: "Fungsi Rem (brake)", hazard: "AA" },
+              { no: 8, name: "Fungsi Joy Stick", hazard: "AA" },
+              { no: 9, name: "Fungsi Alarm Travel", hazard: "AA" },
+              { no: 10, name: "Fungsi Sistem Hidrolik", hazard: "AA" },
+              { no: 11, name: "Sabuk Pengaman", hazard: "AA" },
+              { no: 12, name: "Fungsi Air Conditioner (AC)", hazard: "A" },
+              { no: 13, name: "Fungsi Radio & Chanal", hazard: "A" },
+              { no: 14, name: "Kotak dan Isi P3K", hazard: "A" },
+              { no: 15, name: "Kebersihan Ruang Kabin", hazard: "A" }
+            ]
+          }
+        ]
+      },
+
+      "Bulldozer": {
+        code: "BD",
+        title: "PEMERIKSAAN DAN PERAWATAN HARIAN (P2H) BULLDOZER",
+        mode: "HEAVY",
+        sigRoles: ["Operator", "Foreman / Pengawas"],
+        sopNotes: [
+          "1. P2H harus dilakukan setiap awal Shift dan ditandatangani Pengawas/Atasan. Form diserahkan setiap akhir shift.",
+          "2. Mengoperasikan unit dengan kerusakan AA dan Tidak melakukan P2H akan dikenai Sanksi sesuai Peraturan Keselamatan yang berlaku."
+        ],
+        sections: [
+          {
+            code: "A",
+            title: "Pemeriksaan Dalam Ruang Mesin",
+            items: [
+              { no: 1, name: "Oli engine", hazard: "AA" },
+              { no: 2, name: "Air radiator", hazard: "AA" },
+              { no: 3, name: "Oli Hidrolik, Transmisi", hazard: "AA" },
+              { no: 4, name: "Aki (Tidak drop/bocor/asam berlebih)", hazard: "AA" },
+              { no: 5, name: "Kebersihan Ruang Mesin", hazard: "AA" },
+              { no: 6, name: "Semua Tali Kipas (Fan belt)", hazard: "A" }
+            ]
+          },
+          {
+            code: "B",
+            title: "Pemeriksaan Luar Kabin (Keliling Unit)",
+            items: [
+              { no: 1, name: "Kabin dan Bodi", hazard: "AA" },
+              { no: 2, name: "Kaca depan, samping & belakang", hazard: "AA" },
+              { no: 3, name: "Fisik Track", hazard: "AA" },
+              { no: 4, name: "Baut Track", hazard: "AA" },
+              { no: 5, name: "Komponen Undercarriage", hazard: "AA" },
+              { no: 6, name: "Komponen Attachment (Blade)", hazard: "AA" },
+              { no: 7, name: "Tangki Bahan Bakar (Tidak Bocor)", hazard: "AA" },
+              { no: 8, name: "Fungsi Emergency Stop", hazard: "AA" },
+              { no: 9, name: "Alat Pemadam Api Ringan (APAR)", hazard: "A" },
+              { no: 10, name: "Nomor Lambung", hazard: "A" },
+              { no: 11, name: "Scothlight Keliling Kabin Unit", hazard: "A" },
+              { no: 12, name: "Kebersihan Luar unit", hazard: "A" }
+            ]
+          },
+          {
+            code: "C",
+            title: "Pemeriksaan Dalam Kabin",
+            items: [
+              { no: 1, name: "Fungsi Kontrol Panel", hazard: "AA" },
+              { no: 2, name: "Fungsi Lampu Kerja", hazard: "AA" },
+              { no: 3, name: "Fungsi Lampu Rotary", hazard: "AA" },
+              { no: 4, name: "Fungsi Kaca spion", hazard: "AA" },
+              { no: 5, name: "Fungsi Klakson", hazard: "AA" },
+              { no: 6, name: "Fungsi Wipper & Air", hazard: "AA" },
+              { no: 7, name: "Fungsi Rem (brake)", hazard: "AA" },
+              { no: 8, name: "Fungsi Joy Stick", hazard: "AA" },
+              { no: 9, name: "Fungsi Alarm mundur", hazard: "AA" },
+              { no: 10, name: "Fungsi Sistem Hidrolik", hazard: "AA" },
+              { no: 11, name: "Sabuk Pengaman", hazard: "AA" },
+              { no: 12, name: "Fungsi Air Conditioner (AC)", hazard: "A" },
+              { no: 13, name: "Fungsi Radio & Chanal", hazard: "A" },
+              { no: 14, name: "Kotak dan Isi P3K", hazard: "A" },
+              { no: 15, name: "Kebersihan Ruang Kabin", hazard: "A" }
+            ]
+          }
+        ]
+      },
+
+      "Grader": {
+        code: "GD",
+        title: "PEMERIKSAAN DAN PERAWATAN HARIAN (P2H) GRADER (GD)",
+        mode: "HEAVY",
+        sigRoles: ["Driver / Operator", "Foreman / Pengawas"],
+        sopNotes: [
+          "1. P2H harus dilakukan setiap awal Shift dan ditandatangani Pengawas/Atasan. Form diserahkan setiap akhir shift.",
+          "2. Mengoperasikan unit dengan kerusakan AA dan Tidak melakukan P2H akan dikenai Sanksi sesuai Peraturan Keselamatan yang berlaku."
+        ],
+        sections: [
+          {
+            code: "A",
+            title: "Pemeriksaan Umum",
+            items: [
+              { no: 1, name: "Periksa Oli mesin", hazard: "AA" },
+              { no: 2, name: "Periksa Oli Hydraulic", hazard: "AA" },
+              { no: 3, name: "Periksa Stering", hazard: "AA" },
+              { no: 4, name: "Periksa Circle Gear", hazard: "AA" },
+              { no: 5, name: "Periksa Bahan bakar solar", hazard: "AA" },
+              { no: 6, name: "Periksa air radiator", hazard: "AA" },
+              { no: 7, name: "Periksa Accu", hazard: "AA" },
+              { no: 8, name: "Periksa tanki udara dan autolube", hazard: "AA" },
+              { no: 9, name: "Periksa fungsi monitor panel", hazard: "AA" },
+              { no: 10, name: "Periksa oli gear box", hazard: "AA" },
+              { no: 11, name: "Periksa semua tali kipas", hazard: "AA" },
+              { no: 12, name: "Periksa klakson", hazard: "AA" },
+              { no: 13, name: "Periksa sistem kemudi/travel handle", hazard: "AA" },
+              { no: 14, name: "Periksa sabuk pengaman", hazard: "AA" },
+              { no: 15, name: "Periksa selang-selang hydraulic", hazard: "AA" },
+              { no: 16, name: "Periksa kebocoran zat cair", hazard: "AA" },
+              { no: 17, name: "Periksa baut/mur dan pin", hazard: "AA" },
+              { no: 18, name: "Periksa bunyi yang aneh", hazard: "AA" },
+              { no: 19, name: "Periksa cutting Edge", hazard: "AA" },
+              { no: 20, name: "Periksa kebocoran hyd. & silinder-silinder", hazard: "AA" },
+              { no: 21, name: "Periksa kaca depan dan sekitar kabin panel", hazard: "AA" },
+              { no: 22, name: "Periksa Alat Pemadam Api Ringan (APAR)", hazard: "A" }
+            ]
+          },
+          {
+            code: "B",
+            title: "Pemeriksaan Sebelum Start",
+            items: [
+              { no: 1, name: "Periksa kondisi Ban", hazard: "AA" },
+              { no: 2, name: "Periksa kondisi Kabin/Rop canopi", hazard: "AA" },
+              { no: 3, name: "Periksa Monitor Panel", hazard: "AA" },
+              { no: 4, name: "Periksa semua handle", hazard: "AA" },
+              { no: 5, name: "Kotak dan Isi P3K", hazard: "A" },
+              { no: 6, name: "Kebersihan Ruang Kabin", hazard: "A" }
+            ]
+          },
+          {
+            code: "C",
+            title: "Pemeriksaan Setelah distart",
+            items: [
+              { no: 1, name: "Periksa tekanan oli mesin", hazard: "AA" },
+              { no: 2, name: "Periksa tekanan bahan bakar", hazard: "AA" },
+              { no: 3, name: "Periksa tekanan angin", hazard: "AA" },
+              { no: 4, name: "Periksa fungsi monitor panel", hazard: "AA" },
+              { no: 5, name: "Periksa suhu mesin", hazard: "AA" },
+              { no: 6, name: "Periksa suhu hydraulic", hazard: "AA" },
+              { no: 7, name: "Periksa wiper & air", hazard: "AA" },
+              { no: 8, name: "Periksa fungsi blade & ripper", hazard: "AA" },
+              { no: 9, name: "Periksa semua lampu", hazard: "AA" },
+              { no: 10, name: "Periksa back alrm", hazard: "AA" },
+              { no: 11, name: "Periksa kaca spion", hazard: "AA" },
+              { no: 12, name: "Fungsi Air Conditioner (AC)", hazard: "A" },
+              { no: 13, name: "Fungsi Radio & Chanal", hazard: "A" }
+            ]
+          }
+        ]
+      },
+
+      "Wheel Loader": {
+        code: "WL",
+        title: "PEMERIKSAAN DAN PERAWATAN HARIAN (P2H) WHEEL LOADER (WL)",
+        mode: "HEAVY",
+        sigRoles: ["Driver / Operator", "Foreman / Pengawas"],
+        sopNotes: [
+          "1. P2H harus dilakukan setiap awal Shift dan ditandatangani Pengawas/Atasan. Form diserahkan setiap akhir shift.",
+          "2. Mengoperasikan unit dengan kerusakan AA dan Tidak melakukan P2H akan dikenai Sanksi sesuai Peraturan Keselamatan yang berlaku."
+        ],
+        sections: [
+          {
+            code: "A",
+            title: "Pemeriksaan Umum",
+            items: [
+              { no: 1, name: "Periksa Oli mesin", hazard: "AA" },
+              { no: 2, name: "Periksa Oli Hydraulic", hazard: "AA" },
+              { no: 3, name: "Periksa Stering", hazard: "AA" },
+              { no: 4, name: "Periksa Circle Gear", hazard: "AA" },
+              { no: 5, name: "Periksa Bahan bakar solar", hazard: "AA" },
+              { no: 6, name: "Periksa air radiator", hazard: "AA" },
+              { no: 7, name: "Periksa Accu", hazard: "AA" },
+              { no: 8, name: "Periksa tanki udara dan autolube", hazard: "AA" },
+              { no: 9, name: "Periksa fungsi monitor panel", hazard: "AA" },
+              { no: 10, name: "Periksa oli gear box", hazard: "AA" },
+              { no: 11, name: "Periksa semua tali kipas", hazard: "AA" },
+              { no: 12, name: "Periksa klakson", hazard: "AA" },
+              { no: 13, name: "Periksa sistem kemudi/travel handle", hazard: "AA" },
+              { no: 14, name: "Periksa sabuk pengaman", hazard: "AA" },
+              { no: 15, name: "Periksa selang-selang hydraulic", hazard: "AA" },
+              { no: 16, name: "Periksa kebocoran zat cair", hazard: "AA" },
+              { no: 17, name: "Periksa baut/mur dan pin", hazard: "AA" },
+              { no: 18, name: "Periksa bunyi yang aneh", hazard: "AA" },
+              { no: 19, name: "Periksa cutting Edge", hazard: "AA" },
+              { no: 20, name: "Periksa kebocoran hyd. & silinder-silinder", hazard: "AA" },
+              { no: 21, name: "Periksa kaca depan dan sekitar kabin panel", hazard: "AA" },
+              { no: 22, name: "Periksa Alat Pemadam Api Ringan (APAR)", hazard: "A" }
+            ]
+          },
+          {
+            code: "B",
+            title: "Pemeriksaan Sebelum Start",
+            items: [
+              { no: 1, name: "Periksa kondisi Ban", hazard: "AA" },
+              { no: 2, name: "Periksa kondisi Kabin/Rop canopi", hazard: "AA" },
+              { no: 3, name: "Periksa Monitor Panel", hazard: "AA" },
+              { no: 4, name: "Periksa semua handle", hazard: "AA" },
+              { no: 5, name: "Kotak dan Isi P3K", hazard: "A" },
+              { no: 6, name: "Kebersihan Ruang Kabin", hazard: "A" }
+            ]
+          },
+          {
+            code: "C",
+            title: "Pemeriksaan Setelah distart",
+            items: [
+              { no: 1, name: "Periksa tekanan oli mesin", hazard: "AA" },
+              { no: 2, name: "Periksa tekanan bahan bakar", hazard: "AA" },
+              { no: 3, name: "Periksa tekanan angin", hazard: "AA" },
+              { no: 4, name: "Periksa fungsi monitor panel", hazard: "AA" },
+              { no: 5, name: "Periksa suhu mesin", hazard: "AA" },
+              { no: 6, name: "Periksa suhu hydraulic", hazard: "AA" },
+              { no: 7, name: "Periksa wiper & air", hazard: "AA" },
+              { no: 8, name: "Periksa fungsi blade & ripper", hazard: "AA" },
+              { no: 9, name: "Periksa semua lampu", hazard: "AA" },
+              { no: 10, name: "Periksa back alrm", hazard: "AA" },
+              { no: 11, name: "Periksa kaca spion", hazard: "AA" },
+              { no: 12, name: "Fungsi Air Conditioner (AC)", hazard: "A" },
+              { no: 13, name: "Fungsi Radio & Chanal", hazard: "A" }
+            ]
+          }
+        ]
+      }
+    };
+
+    /* =========================================================================
+       2. STATE MANAGEMENT & LOCAL STORAGE
+       ========================================================================= */
+    const STORAGE_KEYS = {
+      P2H: "spt_group_p2h_records_v6",
+      WO: "spt_group_wo_records_v6",
+      QUEUE: "spt_group_gsheet_queue_v6"
+    };
+
+    let state = {
+      company: "PT SPT",
+      vehicle: "Light Vehicle",
+      checklistValues: {},
+      sigPads: [],
+      isUploading: false,
+      logoStatus: "CHECKING"
+    };
+
+    function loadJson(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function saveJson(key, data) {
+      try {
+        localStorage.setItem(key, JSON.stringify(data));
+      } catch (e) {
+        showToast("⚠️ Penyimpanan browser penuh. Export CSV disarankan.");
+      }
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById("toast");
+      el.textContent = msg;
+      el.classList.add("show");
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => el.classList.remove("show"), 3800);
+    }
+
+    /* =========================================================================
+       3. UPLOAD ANIMATION CONTROLLER (OVERLAY + HEADER SYNC INDICATOR)
+       ========================================================================= */
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function setUploadVisualState({ active, title, subtitle, step, percent, done = false, offline = false }) {
+      const overlay = document.getElementById("uploadOverlay");
+      const modal = document.getElementById("uploadModalBox");
+      const titleEl = document.getElementById("uploadTitle");
+      const subEl = document.getElementById("uploadSubtitle");
+      const stepEl = document.getElementById("uploadStepLabel");
+      const pctEl = document.getElementById("uploadPercentText");
+      const barEl = document.getElementById("uploadProgressBar");
+      const svgUp = document.getElementById("svgUploadingIcon");
+      const svgOk = document.getElementById("svgSuccessIcon");
+
+      if (!active) {
+        overlay.classList.remove("active");
+        modal.classList.remove("done", "offline-mode");
+        return;
+      }
+
+      overlay.classList.add("active");
+      modal.classList.toggle("done", Boolean(done));
+      modal.classList.toggle("offline-mode", Boolean(offline));
+
+      if (title !== undefined) titleEl.textContent = title;
+      if (subtitle !== undefined) subEl.textContent = subtitle;
+      if (step !== undefined) stepEl.textContent = step;
+      if (percent !== undefined) {
+        pctEl.textContent = `${percent}%`;
+        barEl.style.width = `${percent}%`;
+      }
+
+      if (done || offline) {
+        svgUp.style.display = "none";
+        svgOk.style.display = "block";
+      } else {
+        svgUp.style.display = "block";
+        svgOk.style.display = "none";
+      }
+    }
+
+    function setHeaderUploading(isUploading) {
+      state.isUploading = isUploading;
+      const badge = document.getElementById("networkBadge");
+      const dot = document.getElementById("netDot");
+      const spinner = document.getElementById("netSpinner");
+      const text = document.getElementById("netText");
+      const submitBtn = document.getElementById("btnSubmitP2h");
+
+      if (isUploading) {
+        badge.classList.add("uploading");
+        dot.style.display = "none";
+        spinner.style.display = "inline-block";
+        text.textContent = "Mengunggah Data ke Server...";
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = `<span class="mini-spinner"></span> Mengunggah Data...`;
+        }
+      } else {
+        badge.classList.remove("uploading");
+        dot.style.display = "inline-block";
+        spinner.style.display = "none";
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `💾 Simpan &amp; Kirim Laporan P2H`;
+        }
+        updateNetworkAndQueueUI();
+      }
+    }
+
+    /* =========================================================================
+       4. LOGO FALLBACK CHAIN (GOOGLE DRIVE ONLINE -> THUMBNAIL -> SVG VECTOR)
+       ========================================================================= */
+    let logoAttempt = 0;
+    function handleLogoLoad() {
+      state.logoStatus = "ONLINE (Logo SPT Group)";
+    }
+    function handleLogoError(imgEl) {
+      logoAttempt++;
+      if (logoAttempt === 1) {
+        imgEl.src = "https://drive.google.com/thumbnail?id=1cOiou-d82BDK1Rm7ZynjUt15ZUHrG70D&sz=w600";
+      } else if (logoAttempt === 2) {
+        imgEl.src = "https://drive.google.com/uc?export=view&id=1cOiou-d82BDK1Rm7ZynjUt15ZUHrG70D";
+      } else {
+        imgEl.style.display = "none";
+        const svgFb = document.getElementById("sptSvgFallback");
+        if (svgFb) svgFb.style.display = "flex";
+        state.logoStatus = "FALLBACK VECTOR";
+      }
+    }
+
+    /* =========================================================================
+       5. TOP DROPDOWN HANDLERS & FORM RENDERING
+       ========================================================================= */
+    function onCompanyChange() {
+      state.company = document.getElementById("companyDropdown").value;
+      const comp = COMPANIES[state.company];
+      document.getElementById("companyFullBadge").textContent = comp.full;
+      updateDocBanner();
+      renderSignatures();
+    }
+
+    function onVehicleChange() {
+      state.vehicle = document.getElementById("vehicleDropdown").value;
+      state.checklistValues = {};
+      renderFormStructure();
+    }
+
+    function updateDocBanner() {
+      const comp = COMPANIES[state.company];
+      const tpl = P2H_TEMPLATES[state.vehicle];
+      document.getElementById("formDocTitle").textContent = tpl.title;
+      document.getElementById("formDocSub").textContent =
+        `SPT GROUP • Perusahaan: ${comp.code} (${comp.full}) • Project Pertambangan Bauksit Site-Kuala Labai / Simpang Hulu`;
+
+      const totalItems = tpl.sections.reduce((acc, s) => acc + s.items.length, 0);
+      document.getElementById("vehicleMetaBadge").textContent = `${totalItems} Item Pemeriksaan • Form ${tpl.code}`;
+    }
+
+    function renderFormStructure() {
+      const tpl = P2H_TEMPLATES[state.vehicle];
+      updateDocBanner();
+
+      const isLv = tpl.mode === "LV";
+      document.getElementById("grpNik").style.display = isLv ? "flex" : "none";
+      document.getElementById("grpKegiatan").style.display = isLv ? "flex" : "none";
+
+      // Ensure 3-column precision on desktop when NIK & Kegiatan are hidden for Heavy Equipment
+      document.getElementById("identityRow1").classList.toggle("cols-3", !isLv);
+      document.getElementById("identityRow2").classList.toggle("cols-3", !isLv);
+
+      const legendEl = document.getElementById("conditionLegendText");
+      if (isLv) {
+        legendEl.innerHTML = `
+          <strong>Keterangan Kondisi (Light Vehicle):</strong><br/>
+          • <strong>NORMAL</strong> = Kondisi Baik / Layak Operasi<br/>
+          • <strong>TIDAK NORMAL</strong> = Kondisi Rusak / Perlu Perbaikan (Isi Catatan)
+        `;
+      } else {
+        legendEl.innerHTML = `
+          <strong>Keterangan Kondisi (${state.vehicle}):</strong><br/>
+          • <strong>B</strong> = Kondisi Baik / Normal<br/>
+          • <strong>KB</strong> = Kondisi Kurang Baik<br/>
+          • <strong>R</strong> = Kondisi Rusak / Tidak Normal
+        `;
+      }
+
+      const container = document.getElementById("checklistSectionsContainer");
+      container.innerHTML = "";
+
+      tpl.sections.forEach(sec => {
+        const card = document.createElement("div");
+        card.className = "section-card";
+
+        let rowsHtml = "";
+        sec.items.forEach(item => {
+          const key = `${sec.code}-${item.no}`;
+          const saved = state.checklistValues[key] || { val: "", note: "" };
+
+          let rowClass = "";
+          if (saved.val === "R" || saved.val === "TIDAK_NORMAL") {
+            rowClass = item.hazard === "AA" ? "row-danger" : "row-warn";
+          } else if (saved.val === "KB") {
+            rowClass = "row-warn";
+          }
+
+          const buttonsHtml = isLv
+            ? `<div class="cond-group">
+                <button type="button" class="cond-btn ${saved.val === 'NORMAL' ? 'sel-NORMAL' : ''}" onclick="setItemCond('${key}', 'NORMAL')">NORMAL</button>
+                <button type="button" class="cond-btn ${saved.val === 'TIDAK_NORMAL' ? 'sel-TIDAK_NORMAL' : ''}" onclick="setItemCond('${key}', 'TIDAK_NORMAL')">TIDAK NORMAL</button>
+               </div>`
+            : `<div class="cond-group">
+                <button type="button" class="cond-btn ${saved.val === 'B' ? 'sel-B' : ''}" onclick="setItemCond('${key}', 'B')">B</button>
+                <button type="button" class="cond-btn ${saved.val === 'KB' ? 'sel-KB' : ''}" onclick="setItemCond('${key}', 'KB')">KB</button>
+                <button type="button" class="cond-btn ${saved.val === 'R' ? 'sel-R' : ''}" onclick="setItemCond('${key}', 'R')">R</button>
+               </div>`;
+
+          rowsHtml += `
+            <tr id="row-${key}" class="${rowClass}">
+              <td class="col-no" style="width:46px; font-weight:700; text-align:center;">${item.no}</td>
+              <td class="col-name">${item.name}</td>
+              <td class="col-hazard" style="width:98px; text-align:center;">
+                <span class="hazard-pill hazard-${item.hazard}">${item.hazard}</span>
+              </td>
+              <td class="col-cond" style="width:205px;">${buttonsHtml}</td>
+              <td class="col-note">
+                <input type="text" class="note-input" placeholder="${isLv ? 'Catatan temuan...' : 'Keterangan jika KB / R...'}"
+                  value="${escapeHtml(saved.note)}"
+                  oninput="setItemNote('${key}', this.value)" />
+              </td>
+            </tr>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="section-head">
+            <span>${sec.code}. ${sec.title}</span>
+            <span style="font-size:0.76rem; color:#475569;">${sec.items.length} Item</span>
+          </div>
+          <div class="table-wrap">
+            <table class="p2h-table p2h-checklist-table">
+              <thead>
+                <tr>
+                  <th style="width:46px; text-align:center;">No</th>
+                  <th>Item Pemeriksaan</th>
+                  <th style="width:98px; text-align:center;">Kode Bahaya</th>
+                  <th style="width:205px;">Kondisi</th>
+                  <th>Catatan / Keterangan Kerusakan</th>
+                </tr>
+              </thead>
+              <tbody>${rowsHtml}</tbody>
+            </table>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      document.getElementById("sopNotesBox").innerHTML =
+        `<strong>Catatan Penting SOP P2H SPT Group:</strong><br/>` + tpl.sopNotes.join("<br/>");
+
+      evaluateHazards();
+      renderSignatures();
+    }
+
+    function setItemCond(key, val) {
+      if (!state.checklistValues[key]) state.checklistValues[key] = { val: "", note: "" };
+      state.checklistValues[key].val = val;
+      renderFormStructure();
+    }
+
+    function setItemNote(key, note) {
+      if (!state.checklistValues[key]) state.checklistValues[key] = { val: "", note: "" };
+      state.checklistValues[key].note = note;
+    }
+
+    function markAllGood() {
+      const tpl = P2H_TEMPLATES[state.vehicle];
+      const goodVal = tpl.mode === "LV" ? "NORMAL" : "B";
+      tpl.sections.forEach(sec => {
+        sec.items.forEach(item => {
+          const key = `${sec.code}-${item.no}`;
+          const prevNote = state.checklistValues[key]?.note || "";
+          state.checklistValues[key] = { val: goodVal, note: prevNote };
+        });
+      });
+      renderFormStructure();
+      showToast(`✓ Semua item ${state.vehicle} ditandai ${goodVal}. Periksa kembali item yang rusak.`);
+    }
+
+    function resetForm() {
+      state.checklistValues = {};
+      document.getElementById("inpNama").value = "";
+      document.getElementById("inpNik").value = "";
+      document.getElementById("inpTypeUnit").value = "";
+      document.getElementById("inpNoUnit").value = "";
+      document.getElementById("inpKegiatan").value = "";
+      document.getElementById("inpHmAwal").value = "";
+      document.getElementById("inpHmAkhir").value = "";
+      document.getElementById("inpTotalHm").value = "0.0";
+      document.querySelectorAll(".extra-defect").forEach(el => el.value = "");
+      renderFormStructure();
+      showToast("↺ Form P2H telah direset.");
+    }
+
+    function calcTotalHm() {
+      const awal = parseFloat(document.getElementById("inpHmAwal").value);
+      const akhir = parseFloat(document.getElementById("inpHmAkhir").value);
+      const totalEl = document.getElementById("inpTotalHm");
+      if (!isNaN(awal) && !isNaN(akhir)) {
+        if (akhir < awal) {
+          totalEl.value = "⚠️ HM Akhir < HM Awal";
+          totalEl.style.color = "#dc2626";
+        } else {
+          totalEl.value = (akhir - awal).toFixed(1);
+          totalEl.style.color = "#0f2942";
+        }
+      } else {
+        totalEl.value = "0.0";
+        totalEl.style.color = "#0f2942";
+      }
+    }
+
+    function evaluateHazards() {
+      const tpl = P2H_TEMPLATES[state.vehicle];
+      const aaDefects = [];
+      const aDefects = [];
+
+      tpl.sections.forEach(sec => {
+        sec.items.forEach(item => {
+          const key = `${sec.code}-${item.no}`;
+          const entry = state.checklistValues[key];
+          if (!entry || !entry.val) return;
+          const isDamaged = (entry.val === "R" || entry.val === "TIDAK_NORMAL" || entry.val === "KB");
+          if (isDamaged) {
+            const label = `[${sec.code}.${item.no}] ${item.name} (${entry.val}${entry.note ? " - " + entry.note : ""})`;
+            if (item.hazard === "AA") aaDefects.push(label);
+            else aDefects.push(label);
+          }
+        });
+      });
+
+      const alertBox = document.getElementById("stopOperasiAlert");
+      const listBox = document.getElementById("stopOperasiList");
+      if (aaDefects.length > 0) {
+        alertBox.classList.add("show");
+        listBox.innerHTML = aaDefects.map(d => `• <strong>${escapeHtml(d)}</strong>`).join("<br/>");
+      } else {
+        alertBox.classList.remove("show");
+        listBox.innerHTML = "";
+      }
+
+      return { aaDefects, aDefects };
+    }
+
+    /* =========================================================================
+       6. HIGH-DPI DIGITAL SIGNATURE PADS (RESPONSIVE + ORIENTATION SAFE)
+       ========================================================================= */
+    function renderSignatures() {
+      const tpl = P2H_TEMPLATES[state.vehicle];
+      const container = document.getElementById("signaturesContainer");
+      const colsClass = tpl.sigRoles.length === 3 ? "grid-3" : "grid-2";
+
+      // Preserve existing names & strokes before re-rendering
+      const prevNames = tpl.sigRoles.map((_, idx) => document.getElementById(`sigName-${idx}`)?.value || "");
+      const prevStrokes = tpl.sigRoles.map((_, idx) =>
+        state.sigPads[idx]?.hasStroke() ? state.sigPads[idx].canvas.toDataURL("image/png") : ""
+      );
+
+      let html = `<div class="${colsClass}">`;
+      tpl.sigRoles.forEach((role, idx) => {
+        html += `
+          <div class="sig-box">
+            <h4>${role} (${state.company})</h4>
+            <div class="sig-canvas-wrap">
+              <canvas id="sigCanvas-${idx}"></canvas>
+            </div>
+            <div class="sig-footer">
+              <input type="text" id="sigName-${idx}" value="${escapeHtml(prevNames[idx] || "")}" placeholder="Nama terang..." />
+              <button type="button" class="btn btn-outline btn-sm" onclick="clearSigPad(${idx})">Hapus</button>
+            </div>
+          </div>
+        `;
+      });
+      html += `</div>`;
+      container.innerHTML = html;
+
+      state.sigPads = [];
+      tpl.sigRoles.forEach((_, idx) => {
+        const canvas = document.getElementById(`sigCanvas-${idx}`);
+        if (canvas) initSingleCanvas(canvas, idx, prevStrokes[idx]);
+      });
+    }
+
+    function initSingleCanvas(canvas, idx, restoreDataUrl = "") {
+      const ctx = canvas.getContext("2d");
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      const cssW = Math.max(220, rect.width);
+      const cssH = Math.max(120, rect.height);
+      canvas.width = cssW * dpr;
+      canvas.height = cssH * dpr;
+      ctx.scale(dpr, dpr);
+      ctx.lineWidth = 2.1;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.strokeStyle = "#0f172a";
+
+      let drawing = false;
+      let hasStroke = false;
+
+      if (restoreDataUrl) {
+        const img = new Image();
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0, cssW, cssH);
+          hasStroke = true;
         };
+        img.src = restoreDataUrl;
+      }
 
-        const criticalKeys = ['rem', 'kemudi', 'rotator', 'radio', 'apar', 'seatbelt'];
+      function getPos(e) {
+        const r = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return { x: clientX - r.left, y: clientY - r.top };
+      }
 
-        document.getElementById('opDateTime').value = new Date().toISOString().slice(0, 16);
+      function start(e) {
+        drawing = true;
+        hasStroke = true;
+        const pos = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+      }
 
-        function setCheck(element, key, val) {
-            const parent = element.parentElement;
-            parent.querySelectorAll('.btn-opt').forEach(b => b.classList.remove('active'));
-            element.classList.add('active');
-            checks[key] = val;
-            evaluateFeasibility();
+      function move(e) {
+        if (!drawing) return;
+        if (e.cancelable) e.preventDefault();
+        const pos = getPos(e);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+      }
+
+      function end() { drawing = false; }
+
+      canvas.addEventListener("mousedown", start);
+      canvas.addEventListener("mousemove", move);
+      window.addEventListener("mouseup", end);
+      canvas.addEventListener("touchstart", start, { passive: false });
+      canvas.addEventListener("touchmove", move, { passive: false });
+      canvas.addEventListener("touchend", end);
+
+      state.sigPads[idx] = {
+        canvas,
+        ctx,
+        hasStroke: () => hasStroke,
+        clear: () => {
+          ctx.clearRect(0, 0, cssW, cssH);
+          hasStroke = false;
         }
+      };
+    }
 
-        function evaluateFeasibility() {
-            let hasCriticalFail = false;
-            let hasGeneralFail = false;
+    function clearSigPad(idx) {
+      if (state.sigPads[idx]) state.sigPads[idx].clear();
+    }
 
-            criticalKeys.forEach(k => {
-                if (checks[k] === 'RUSAK') hasCriticalFail = true;
+    /* =========================================================================
+       7. SUBMIT P2H, AUTO WORK ORDER, & ANIMATED 1-WAY UPLOAD ENGINE
+       ========================================================================= */
+    async function submitP2HForm() {
+      if (state.isUploading) return;
+
+      const nama = document.getElementById("inpNama").value.trim();
+      const tanggal = document.getElementById("inpTanggal").value;
+      const shift = document.getElementById("inpShift").value;
+      const lokasi = document.getElementById("inpLokasi").value.trim();
+      const typeUnit = document.getElementById("inpTypeUnit").value.trim();
+      const noUnit = document.getElementById("inpNoUnit").value.trim().toUpperCase();
+      const nik = document.getElementById("inpNik").value.trim();
+      const kegiatan = document.getElementById("inpKegiatan").value.trim();
+      const hmAwal = document.getElementById("inpHmAwal").value;
+      const hmAkhir = document.getElementById("inpHmAkhir").value;
+      const totalHm = document.getElementById("inpTotalHm").value;
+
+      if (!nama || !tanggal || !noUnit) {
+        showToast("⚠️ Mohon lengkapi Nama Operator/Driver, Tanggal, dan No. Unit!");
+        return;
+      }
+
+      const tpl = P2H_TEMPLATES[state.vehicle];
+      let uncheckedCount = 0;
+      const itemsDetail = [];
+
+      tpl.sections.forEach(sec => {
+        sec.items.forEach(item => {
+          const key = `${sec.code}-${item.no}`;
+          const entry = state.checklistValues[key];
+          if (!entry || !entry.val) {
+            uncheckedCount++;
+          } else {
+            itemsDetail.push({
+              section: sec.code,
+              sectionTitle: sec.title,
+              no: item.no,
+              item: item.name,
+              hazard: item.hazard,
+              condition: entry.val,
+              note: entry.note || ""
             });
+          }
+        });
+      });
 
-            Object.keys(checks).forEach(k => {
-                if (!criticalKeys.includes(k) && checks[k] === 'RUSAK') hasGeneralFail = true;
-            });
+      if (uncheckedCount > 0) {
+        showToast(`⚠️ Masih ada ${uncheckedCount} item pemeriksaan yang belum dipilih kondisinya!`);
+        return;
+      }
 
-            const banner = document.getElementById('statusBanner');
+      const extraDefects = Array.from(document.querySelectorAll(".extra-defect"))
+        .map(el => el.value.trim())
+        .filter(Boolean);
 
-            if (hasCriticalFail) {
-                banner.className = "status-banner status-stop";
-                banner.innerText = "STOP-NO-GO (DILARANG OPERASI)";
-                return "STOP-NO-GO";
-            } else if (hasGeneralFail) {
-                banner.className = "status-banner status-caution";
-                banner.innerText = "OPERATE WITH CAUTION";
-                return "OPERATE WITH CAUTION";
-            } else {
-                banner.className = "status-banner status-ready";
-                banner.innerText = "READY TO OPERATE";
-                return "READY TO OPERATE";
-            }
+      const { aaDefects, aDefects } = evaluateHazards();
+      const unitStatus = aaDefects.length > 0
+        ? "STOP OPERASI (BAHAYA AA)"
+        : (aDefects.length > 0 ? "LAIK DENGAN CATATAN (1x12 JAM)" : "LAIK OPERASI");
+
+      const signatures = tpl.sigRoles.map((role, idx) => ({
+        role,
+        name: document.getElementById(`sigName-${idx}`)?.value.trim() || (idx === 0 ? nama : "-"),
+        signed: state.sigPads[idx]?.hasStroke() || false,
+        dataUrl: state.sigPads[idx]?.hasStroke() ? state.sigPads[idx].canvas.toDataURL("image/png") : ""
+      }));
+
+      const signaturesSummary = signatures
+        .map(s => `${s.role}: ${s.name} [${s.signed ? "TTD Digital" : "Belum TTD"}]`)
+        .join(" | ");
+
+      const p2hId = `P2H-${tpl.code}-${Date.now().toString().slice(-6)}`;
+      const record = {
+        action: "INSERT_P2H",
+        id: p2hId,
+        timestamp: new Date().toISOString(),
+        company: state.company,
+        companyFull: COMPANIES[state.company].full,
+        vehicleType: state.vehicle,
+        vehicleCode: tpl.code,
+        nama,
+        nik: nik || "-",
+        tanggal,
+        shift,
+        lokasi,
+        typeUnit: typeUnit || "-",
+        noUnit,
+        kegiatan: kegiatan || "-",
+        hmAwal: hmAwal || "0",
+        hmAkhir: hmAkhir || "0",
+        totalHm,
+        unitStatus,
+        totalItems: itemsDetail.length,
+        aaCount: aaDefects.length,
+        aCount: aDefects.length,
+        aaDefects,
+        aDefects,
+        extraDefects,
+        signaturesSummary,
+        itemsDetail,
+        signatures,
+        syncStatus: "ANTREAN"
+      };
+
+      const p2hList = loadJson(STORAGE_KEYS.P2H, []);
+      p2hList.unshift(record);
+      saveJson(STORAGE_KEYS.P2H, p2hList);
+
+      let createdWo = null;
+      if (aaDefects.length > 0 || aDefects.length > 0) {
+        const woId = `WO-${tpl.code}-${Date.now().toString().slice(-6)}`;
+        createdWo = {
+          action: "INSERT_WO",
+          woId,
+          p2hId,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          tanggal,
+          company: state.company,
+          vehicleType: state.vehicle,
+          noUnit,
+          typeUnit: typeUnit || "-",
+          priority: aaDefects.length > 0 ? "AA (STOP OPERASI - SEGERA)" : "A (PERBAIKAN 1x12 JAM)",
+          defects: [...aaDefects, ...aDefects, ...extraDefects],
+          status: "OPEN",
+          mechanicNote: "Menunggu inspeksi mekanik & sparepart"
+        };
+        const woList = loadJson(STORAGE_KEYS.WO, []);
+        woList.unshift(createdWo);
+        saveJson(STORAGE_KEYS.WO, woList);
+      }
+
+      const gsheetP2hPayload = {
+        action: record.action,
+        id: record.id,
+        timestamp: record.timestamp,
+        tanggal: record.tanggal,
+        shift: record.shift,
+        company: record.company,
+        companyFull: record.companyFull,
+        vehicleType: record.vehicleType,
+        vehicleCode: record.vehicleCode,
+        noUnit: record.noUnit,
+        typeUnit: record.typeUnit,
+        nama: record.nama,
+        nik: record.nik,
+        lokasi: record.lokasi,
+        kegiatan: record.kegiatan,
+        hmAwal: record.hmAwal,
+        hmAkhir: record.hmAkhir,
+        totalHm: record.totalHm,
+        unitStatus: record.unitStatus,
+        totalItems: record.totalItems,
+        aaCount: record.aaCount,
+        aCount: record.aCount,
+        aaDefects: record.aaDefects,
+        aDefects: record.aDefects,
+        extraDefects: record.extraDefects,
+        signaturesSummary: record.signaturesSummary,
+        itemsDetail: record.itemsDetail
+      };
+
+      enqueuePayload(gsheetP2hPayload);
+      if (createdWo) enqueuePayload(createdWo);
+
+      await flushOfflineQueue(false, `Laporan P2H ${noUnit}`);
+      refreshAllViews();
+
+      if (createdWo) {
+        showToast(`🚨 P2H Tersimpan! Terdeteksi kerusakan — Work Order ${createdWo.woId} otomatis diterbitkan & dikirim.`);
+      } else {
+        showToast(`✅ P2H ${p2hId} (${noUnit}) Tersimpan & berhasil dikirim ke database!`);
+      }
+    }
+
+    function enqueuePayload(payload) {
+      const queue = loadJson(STORAGE_KEYS.QUEUE, []);
+      queue.push(payload);
+      saveJson(STORAGE_KEYS.QUEUE, queue);
+      updateNetworkAndQueueUI();
+    }
+
+    async function sendOneWayPost(payload) {
+      await fetch(GAS_WEBAPP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+      });
+      return true;
+    }
+
+    async function flushOfflineQueue(silent = false, contextLabel = "Data P2H & Pemeliharaan") {
+      const queue = loadJson(STORAGE_KEYS.QUEUE, []);
+
+      if (queue.length === 0) {
+        if (!silent) showToast("✓ Semua data P2H & WO sudah terkirim (Antrean 0).");
+        return;
+      }
+
+      if (!navigator.onLine) {
+        updateNetworkAndQueueUI();
+        if (!silent) {
+          setUploadVisualState({
+            active: true,
+            offline: true,
+            title: "Perangkat Sedang Offline",
+            subtitle: "Data P2H disimpan aman di memori perangkat & akan otomatis dikirim saat online.",
+            step: "Tersimpan di Antrean Lokal",
+            percent: 100
+          });
+          await sleep(1300);
+          setUploadVisualState({ active: false });
+          showToast("📡 Perangkat offline. Data aman di antrean lokal.");
         }
+        return;
+      }
 
-        function previewPhoto(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = new Image();
-                    img.src = e.target.result;
-                    img.onload = function() {
-                        const canvas = document.createElement('canvas');
-                        const ctx = canvas.getContext('2d');
-                        const maxWidth = 600;
-                        const scale = maxWidth / img.width;
-                        canvas.width = maxWidth;
-                        canvas.height = img.height * scale;
-                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                        
-                        photoBase64 = canvas.toDataURL('image/jpeg', 0.6);
-                        const preview = document.getElementById('photoPreview');
-                        preview.src = photoBase64;
-                        preview.style.display = 'block';
-                    }
+      setHeaderUploading(true);
+
+      if (!silent) {
+        setUploadVisualState({
+          active: true,
+          title: "Mengunggah Data ke Server...",
+          subtitle: `Mengirim ${contextLabel} (${queue.length} paket data)`,
+          step: "Menyiapkan & memvalidasi struktur data...",
+          percent: 24
+        });
+        await sleep(320);
+        setUploadVisualState({
+          active: true,
+          step: "Mengirim data ke database pusat SPT Group...",
+          percent: 62
+        });
+      }
+
+      const startTime = Date.now();
+      const remaining = [];
+      const p2hList = loadJson(STORAGE_KEYS.P2H, []);
+      let sentCount = 0;
+
+      for (let i = 0; i < queue.length; i++) {
+        const item = queue[i];
+        try {
+          await sendOneWayPost(item);
+          sentCount++;
+          if (item.action === "INSERT_P2H") {
+            const idx = p2hList.findIndex(r => r.id === item.id);
+            if (idx !== -1) p2hList[idx].syncStatus = "TERKIRIM";
+          }
+        } catch (err) {
+          remaining.push(item);
+        }
+      }
+
+      saveJson(STORAGE_KEYS.QUEUE, remaining);
+      saveJson(STORAGE_KEYS.P2H, p2hList);
+
+      if (!silent) {
+        const elapsed = Date.now() - startTime;
+        if (elapsed < 450) await sleep(450 - elapsed);
+
+        if (remaining.length === 0) {
+          setUploadVisualState({
+            active: true,
+            done: true,
+            title: "Upload Data Berhasil!",
+            subtitle: `${sentCount} paket data telah tersimpan di database SPT Group.`,
+            step: "Sinkronisasi selesai",
+            percent: 100
+          });
+        } else {
+          setUploadVisualState({
+            active: true,
+            offline: true,
+            title: "Sebagian Data Tertunda",
+            subtitle: `${sentCount} terkirim, ${remaining.length} menunggu koneksi stabil.`,
+            step: "Disimpan di antrean ulang",
+            percent: 85
+          });
+        }
+        await sleep(750);
+        setUploadVisualState({ active: false });
+      }
+
+      setHeaderUploading(false);
+      refreshAllViews();
+    }
+
+    /* =========================================================================
+       8. WORK ORDER & HISTORY RENDERING + CSV EXPORT + OFFICIAL A4 PRINT
+       ========================================================================= */
+    function renderWorkOrders() {
+      const woList = loadJson(STORAGE_KEYS.WO, []);
+      const filter = document.getElementById("filterWoStatus").value;
+      const filtered = filter === "ALL" ? woList : woList.filter(w => w.status === filter);
+
+      const tbody = document.getElementById("woTableBody");
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:18px; color:#64748b;">Belum ada data Work Order pada filter ini.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(wo => {
+        const isAA = wo.priority.startsWith("AA");
+        const statusColor = wo.status === "OPEN" ? "#dc2626" : (wo.status === "IN PROGRESS" ? "#d97706" : "#15803d");
+        return `
+          <tr>
+            <td><strong>${escapeHtml(wo.woId)}</strong><br/><span style="font-size:0.74rem; color:#64748b;">Ref: ${escapeHtml(wo.p2hId)}</span></td>
+            <td>${escapeHtml(wo.tanggal)}</td>
+            <td><strong>${escapeHtml(wo.company)}</strong></td>
+            <td><strong>${escapeHtml(wo.noUnit)}</strong><br/><span style="font-size:0.76rem;">${escapeHtml(wo.vehicleType)}</span></td>
+            <td><span class="hazard-pill ${isAA ? 'hazard-AA' : 'hazard-A'}">${escapeHtml(wo.priority)}</span></td>
+            <td style="max-width:260px; font-size:0.8rem;">${wo.defects.map(d => "• " + escapeHtml(d)).join("<br/>")}</td>
+            <td>
+              <span style="display:inline-block; padding:3px 8px; border-radius:5px; color:#fff; font-weight:700; font-size:0.75rem; background:${statusColor};">
+                ${escapeHtml(wo.status)}
+              </span>
+              <div style="font-size:0.74rem; color:#475569; margin-top:4px;">${escapeHtml(wo.mechanicNote || "")}</div>
+            </td>
+            <td>
+              <div style="display:flex; flex-direction:column; gap:5px;">
+                <button type="button" class="btn btn-accent btn-sm" onclick="updateWoStatus('${wo.woId}', 'IN PROGRESS')">⚙️ Proses</button>
+                <button type="button" class="btn btn-success btn-sm" onclick="updateWoStatus('${wo.woId}', 'CLOSED')">✅ Selesai (Laik)</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    async function updateWoStatus(woId, newStatus) {
+      const woList = loadJson(STORAGE_KEYS.WO, []);
+      const idx = woList.findIndex(w => w.woId === woId);
+      if (idx === -1) return;
+
+      const notePrompt = prompt(
+        `Masukkan catatan mekanik / tindakan perbaikan untuk ${woId} (${newStatus}):`,
+        newStatus === "CLOSED" ? "Perbaikan selesai, unit sudah diuji dan laik operasi." : "Unit masuk workshop, sedang penanganan mekanik."
+      );
+      if (notePrompt === null) return;
+
+      woList[idx].status = newStatus;
+      woList[idx].mechanicNote = notePrompt;
+      woList[idx].updatedAt = new Date().toISOString();
+      saveJson(STORAGE_KEYS.WO, woList);
+
+      enqueuePayload({
+        action: "UPDATE_WO",
+        woId,
+        p2hId: woList[idx].p2hId,
+        company: woList[idx].company,
+        vehicleType: woList[idx].vehicleType,
+        noUnit: woList[idx].noUnit,
+        status: newStatus,
+        mechanicNote: notePrompt,
+        updatedAt: woList[idx].updatedAt
+      });
+      await flushOfflineQueue(false, `Update Status ${woId}`);
+      refreshAllViews();
+      showToast(`✅ Status ${woId} diperbarui ke ${newStatus} & dikirim ke database.`);
+    }
+
+    function renderHistory() {
+      const list = loadJson(STORAGE_KEYS.P2H, []);
+      const q = (document.getElementById("searchHistory").value || "").toLowerCase().trim();
+      const filtered = !q ? list : list.filter(r =>
+        r.noUnit.toLowerCase().includes(q) ||
+        r.nama.toLowerCase().includes(q) ||
+        r.company.toLowerCase().includes(q) ||
+        r.vehicleType.toLowerCase().includes(q)
+      );
+
+      const tbody = document.getElementById("historyTableBody");
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:18px; color:#64748b;">Belum ada riwayat pemeriksaan P2H tersimpan.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(r => {
+        const isStop = r.unitStatus.includes("STOP");
+        return `
+          <tr>
+            <td><strong>${escapeHtml(r.id)}</strong></td>
+            <td>${escapeHtml(r.tanggal)}<br/><span style="font-size:0.75rem; color:#64748b;">${escapeHtml(r.shift)}</span></td>
+            <td><strong>${escapeHtml(r.company)}</strong></td>
+            <td><strong>${escapeHtml(r.noUnit)}</strong><br/><span style="font-size:0.75rem;">${escapeHtml(r.vehicleType)}</span></td>
+            <td>${escapeHtml(r.nama)}</td>
+            <td>${escapeHtml(r.hmAwal)} ➔ ${escapeHtml(r.hmAkhir)}<br/><strong>(${escapeHtml(r.totalHm)})</strong></td>
+            <td>
+              <span class="hazard-pill ${isStop ? 'hazard-AA' : 'hazard-A'}" style="${!isStop && r.aCount===0 ? 'background:#dcfce7;color:#15803d;border-color:#86efac;' : ''}">
+                ${escapeHtml(r.unitStatus)}
+              </span>
+            </td>
+            <td><span style="font-size:0.76rem; font-weight:700; color:${r.syncStatus.includes('TERKIRIM') ? '#15803d' : '#d97706'};">${escapeHtml(r.syncStatus)}</span></td>
+            <td>
+              <button type="button" class="btn btn-outline btn-sm" onclick="printSavedRecord('${r.id}')">🖨️ Cetak A4</button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function printSavedRecord(p2hId) {
+      const list = loadJson(STORAGE_KEYS.P2H, []);
+      const rec = list.find(r => r.id === p2hId);
+      if (!rec) return;
+      buildPrintLayout(rec);
+      window.print();
+    }
+
+    function printCurrentDraft() {
+      const tpl = P2H_TEMPLATES[state.vehicle];
+      const itemsDetail = [];
+      tpl.sections.forEach(sec => {
+        sec.items.forEach(item => {
+          const key = `${sec.code}-${item.no}`;
+          const entry = state.checklistValues[key] || { val: "", note: "" };
+          itemsDetail.push({
+            section: sec.code,
+            no: item.no,
+            item: item.name,
+            hazard: item.hazard,
+            condition: entry.val,
+            note: entry.note
+          });
+        });
+      });
+
+      const draftRec = {
+        id: "DRAFT-CETAK",
+        company: state.company,
+        companyFull: COMPANIES[state.company].full,
+        vehicleType: state.vehicle,
+        nama: document.getElementById("inpNama").value || "........................",
+        nik: document.getElementById("inpNik").value || "........................",
+        tanggal: document.getElementById("inpTanggal").value || "........................",
+        shift: document.getElementById("inpShift").value || "........................",
+        lokasi: document.getElementById("inpLokasi").value || "........................",
+        typeUnit: document.getElementById("inpTypeUnit").value || "........................",
+        noUnit: document.getElementById("inpNoUnit").value || "........................",
+        kegiatan: document.getElementById("inpKegiatan").value || "........................",
+        hmAwal: document.getElementById("inpHmAwal").value || "........",
+        hmAkhir: document.getElementById("inpHmAkhir").value || "........",
+        totalHm: document.getElementById("inpTotalHm").value || "........",
+        itemsDetail,
+        extraDefects: Array.from(document.querySelectorAll(".extra-defect")).map(el => el.value.trim()),
+        signatures: tpl.sigRoles.map((role, idx) => ({
+          role,
+          name: document.getElementById(`sigName-${idx}`)?.value || "........................",
+          dataUrl: state.sigPads[idx]?.hasStroke() ? state.sigPads[idx].canvas.toDataURL("image/png") : ""
+        }))
+      };
+      buildPrintLayout(draftRec);
+      window.print();
+    }
+
+    function buildPrintLayout(rec) {
+      const tpl = P2H_TEMPLATES[rec.vehicleType];
+      const isLv = tpl.mode === "LV";
+      let tablesHtml = "";
+
+      tpl.sections.forEach(sec => {
+        const secItems = rec.itemsDetail.filter(i => i.section === sec.code);
+        tablesHtml += `
+          <table>
+            <thead>
+              <tr>
+                <th style="width:32px; text-align:center;">${sec.code}</th>
+                <th>${sec.title}</th>
+                <th style="width:65px; text-align:center;">Kode Bahaya</th>
+                ${isLv
+                  ? `<th style="width:65px; text-align:center;">NORMAL</th><th style="width:75px; text-align:center;">TIDAK NORMAL</th>`
+                  : `<th style="width:38px; text-align:center;">B</th><th style="width:38px; text-align:center;">KB</th><th style="width:38px; text-align:center;">R</th>`
                 }
-                reader.readAsDataURL(file);
-            }
+                <th>Catatan</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${secItems.map(it => `
+                <tr>
+                  <td style="text-align:center;">${it.no}</td>
+                  <td>${escapeHtml(it.item)}</td>
+                  <td style="text-align:center; font-weight:bold;">${it.hazard}</td>
+                  ${isLv
+                    ? `<td style="text-align:center; font-weight:bold;">${it.condition === 'NORMAL' ? '✓' : ''}</td>
+                       <td style="text-align:center; font-weight:bold;">${it.condition === 'TIDAK_NORMAL' ? '✓' : ''}</td>`
+                    : `<td style="text-align:center; font-weight:bold;">${it.condition === 'B' ? '✓' : ''}</td>
+                       <td style="text-align:center; font-weight:bold;">${it.condition === 'KB' ? '✓' : ''}</td>
+                       <td style="text-align:center; font-weight:bold;">${it.condition === 'R' ? '✓' : ''}</td>`
+                  }
+                  <td>${escapeHtml(it.note || "")}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+      });
+
+      const sigHtml = `
+        <table>
+          <tr>
+            ${rec.signatures.map(s => `
+              <th style="text-align:center; width:${Math.floor(100 / rec.signatures.length)}%;">${escapeHtml(s.role)} (${escapeHtml(rec.company)})</th>
+            `).join("")}
+          </tr>
+          <tr>
+            ${rec.signatures.map(s => `
+              <td style="height:68px; text-align:center; vertical-align:bottom;">
+                ${s.dataUrl ? `<img src="${s.dataUrl}" style="max-height:48px; display:block; margin:0 auto;" />` : ""}
+                <div>(${escapeHtml(s.name || "........................")})</div>
+              </td>
+            `).join("")}
+          </tr>
+        </table>
+      `;
+
+      document.getElementById("printSheetArea").innerHTML = `
+        <div style="border:2px solid #000; padding:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #000; padding-bottom:6px; margin-bottom:8px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <img src="https://lh3.googleusercontent.com/d/1cOiou-d82BDK1Rm7ZynjUt15ZUHrG70D=w400" onerror="this.onerror=null;this.src='https://drive.google.com/thumbnail?id=1cOiou-d82BDK1Rm7ZynjUt15ZUHrG70D&sz=w400';" alt="Logo SPT Group" style="max-height:42px; max-width:130px; object-fit:contain;" />
+              <div>
+                <strong style="font-size:13pt;">SPT GROUP — ${escapeHtml(rec.company)}</strong><br/>
+                <span style="font-size:9pt;">${escapeHtml(rec.companyFull || COMPANIES[rec.company].full)} • Site-Kuala Labai / Simpang Hulu</span>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <strong style="font-size:11pt;">${escapeHtml(tpl.title)}</strong><br/>
+              <span style="font-size:8.5pt;">ID Dokumen: ${escapeHtml(rec.id)}</span>
+            </div>
+          </div>
+
+          <table>
+            <tr>
+              <td><strong>NAMA:</strong> ${escapeHtml(rec.nama)}</td>
+              <td><strong>TYPE UNIT:</strong> ${escapeHtml(rec.typeUnit)}</td>
+              <td><strong>HM/KM AWAL:</strong> ${escapeHtml(rec.hmAwal)}</td>
+            </tr>
+            <tr>
+              <td><strong>HARI/TGL:</strong> ${escapeHtml(rec.tanggal)}</td>
+              <td><strong>NO. UNIT:</strong> ${escapeHtml(rec.noUnit)}</td>
+              <td><strong>HM/KM AKHIR:</strong> ${escapeHtml(rec.hmAkhir)}</td>
+            </tr>
+            <tr>
+              <td><strong>SHIFT:</strong> ${escapeHtml(rec.shift)}</td>
+              <td><strong>LOKASI:</strong> ${escapeHtml(rec.lokasi)}</td>
+              <td><strong>TOTAL HM/KM:</strong> ${escapeHtml(rec.totalHm)}</td>
+            </tr>
+          </table>
+
+          ${tablesHtml}
+          ${sigHtml}
+          <div style="font-size:8pt; margin-top:4px;">
+            ${tpl.sopNotes.map(n => `<div>${escapeHtml(n)}</div>`).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    function exportP2hCsv() {
+      const list = loadJson(STORAGE_KEYS.P2H, []);
+      if (list.length === 0) { showToast("Belum ada data P2H untuk diexport."); return; }
+      const headers = [
+        "ID_P2H", "Timestamp_Input", "Tanggal_P2H", "Shift_Kerja", "Kode_Perusahaan", "Nama_Perusahaan",
+        "Jenis_Kendaraan", "Kode_Unit", "No_Unit", "Type_Unit", "Nama_Operator_Driver", "NIK_Karyawan",
+        "Lokasi_Kerja", "Jenis_Kegiatan", "HM_KM_Awal", "HM_KM_Akhir", "Total_HM_KM", "Status_Kelayakan_Unit",
+        "Total_Item_Diperiksa", "Jumlah_Temuan_AA", "Jumlah_Temuan_A", "Daftar_Kerusakan_AA",
+        "Daftar_Kerusakan_A", "Catatan_Kerusakan_Tambahan_1_sd_5", "Pengesahan_TTD"
+      ];
+      const rows = list.map(r => [
+        r.id, r.timestamp, r.tanggal, r.shift, r.company, r.companyFull,
+        r.vehicleType, r.vehicleCode, r.noUnit, r.typeUnit, r.nama, r.nik,
+        r.lokasi, r.kegiatan, r.hmAwal, r.hmAkhir, r.totalHm, r.unitStatus,
+        r.totalItems, r.aaCount, r.aCount, (r.aaDefects || []).join("; "),
+        (r.aDefects || []).join("; "), (r.extraDefects || []).join("; "), r.signaturesSummary || ""
+      ]);
+      downloadCsv("Data_P2H_Header_SPT_Group.csv", headers, rows);
+    }
+
+    function exportWoCsv() {
+      const list = loadJson(STORAGE_KEYS.WO, []);
+      if (list.length === 0) { showToast("Belum ada data Work Order untuk diexport."); return; }
+      const headers = [
+        "No_WO", "Ref_ID_P2H", "Tanggal_Terbit", "Kode_Perusahaan", "Jenis_Kendaraan", "No_Unit",
+        "Type_Unit", "Prioritas_Bahaya", "Daftar_Temuan_Kerusakan", "Status_WO",
+        "Catatan_Mekanik_PLTs", "Waktu_Dibuat", "Waktu_Update_Terakhir"
+      ];
+      const rows = list.map(w => [
+        w.woId, w.p2hId, w.tanggal, w.company, w.vehicleType, w.noUnit,
+        w.typeUnit, w.priority, (w.defects || []).join("; "), w.status,
+        w.mechanicNote, w.createdAt, w.updatedAt || w.createdAt
+      ]);
+      downloadCsv("Work_Order_Maintenance_SPT_Group.csv", headers, rows);
+    }
+
+    function downloadCsv(filename, headers, rows) {
+      const csvLines = [headers.join(","), ...rows.map(r => r.map(v => `"${String(v ?? "").replace(/"/g, '""')}"`).join(","))];
+      const blob = new Blob([csvLines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      a.click();
+    }
+
+    function updateNetworkAndQueueUI() {
+      const queue = loadJson(STORAGE_KEYS.QUEUE, []);
+      document.getElementById("queueCountText").textContent = queue.length;
+
+      if (state.isUploading) return;
+
+      const dot = document.getElementById("netDot");
+      const text = document.getElementById("netText");
+      if (navigator.onLine) {
+        dot.className = "dot online";
+        text.textContent = "Online — Server Terhubung";
+      } else {
+        dot.className = "dot offline";
+        text.textContent = "Offline — Antrean Lokal Aktif";
+      }
+    }
+
+    function refreshAllViews() {
+      const p2hList = loadJson(STORAGE_KEYS.P2H, []);
+      const woList = loadJson(STORAGE_KEYS.WO, []);
+
+      const stopCount = p2hList.filter(r => r.unitStatus.includes("STOP")).length;
+      const laikCount = p2hList.length - stopCount;
+      const openWoCount = woList.filter(w => w.status !== "CLOSED").length;
+
+      document.getElementById("kpiTotalP2h").textContent = p2hList.length;
+      document.getElementById("kpiLaik").textContent = laikCount;
+      document.getElementById("kpiStop").textContent = stopCount;
+      document.getElementById("kpiOpenWo").textContent = openWoCount;
+
+      document.getElementById("openWoBadge").textContent = openWoCount;
+      document.getElementById("historyBadge").textContent = p2hList.length;
+
+      renderWorkOrders();
+      renderHistory();
+      updateNetworkAndQueueUI();
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === tabId));
+      document.querySelectorAll(".tab-pane").forEach(p => p.classList.toggle("active", p.id === tabId));
+      if (tabId === "tabForm") {
+        setTimeout(() => renderSignatures(), 40);
+      }
+      refreshAllViews();
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    /* =========================================================================
+       9. INITIALIZATION & RESPONSIVE RESIZE HANDLER
+       ========================================================================= */
+    window.addEventListener("DOMContentLoaded", () => {
+      const today = new Date().toISOString().split("T")[0];
+      document.getElementById("inpTanggal").value = today;
+
+      onCompanyChange();
+      renderFormStructure();
+      refreshAllViews();
+
+      if (navigator.onLine) {
+        flushOfflineQueue(true);
+      }
+    });
+
+    let _resizeSigTimer = null;
+    window.addEventListener("resize", () => {
+      clearTimeout(_resizeSigTimer);
+      _resizeSigTimer = setTimeout(() => {
+        if (document.getElementById("tabForm").classList.contains("active")) {
+          renderSignatures();
         }
+      }, 180);
+    });
 
-        const canvas = document.getElementById('sigCanvas');
-        const ctx = canvas.getContext('2d');
-        let drawing = false;
-
-        function resizeCanvas() { canvas.width = canvas.offsetWidth; canvas.height = 85; }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        canvas.addEventListener('mousedown', () => drawing = true);
-        canvas.addEventListener('mouseup', () => { drawing = false; ctx.beginPath(); });
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('touchstart', (e) => { drawing = true; e.preventDefault(); });
-        canvas.addEventListener('touchend', () => { drawing = false; ctx.beginPath(); });
-        canvas.addEventListener('touchmove', drawTouch);
-
-        function draw(e) {
-            if (!drawing) return;
-            ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.strokeStyle = '#f59e0b';
-            ctx.lineTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
-            ctx.stroke(); ctx.beginPath();
-            ctx.moveTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
-        }
-
-        function drawTouch(e) {
-            if (!drawing) return;
-            const touch = e.touches[0];
-            ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.strokeStyle = '#f59e0b';
-            ctx.lineTo(touch.clientX - canvas.getBoundingClientRect().left, touch.clientY - canvas.getBoundingClientRect().top);
-            ctx.stroke(); ctx.beginPath();
-            ctx.moveTo(touch.clientX - canvas.getBoundingClientRect().left, touch.clientY - canvas.getBoundingClientRect().top);
-        }
-
-        function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
-
-        function submitForm() {
-            const unitCode = document.getElementById('unitCode').value;
-            const driverName = document.getElementById('driverName').value;
-
-            if(!unitCode || !driverName) {
-                alert('Mohon lengkapi Kode Unit dan Nama Driver!');
-                return;
-            }
-
-            const currentStatus = evaluateFeasibility();
-            const submitBtn = document.getElementById('submitBtn');
-            
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengirim Laporan...`;
-            submitBtn.disabled = true;
-
-            const payload = {
-                opDateTime: document.getElementById('opDateTime').value.replace('T', ' '),
-                shift: document.getElementById('shift').value,
-                unitCode: unitCode,
-                unitType: document.getElementById('unitType').value,
-                driverName: driverName,
-                badgeNo: document.getElementById('badgeNo').value,
-                locationPit: document.getElementById('locationPit').value,
-                hmStart: document.getElementById('hmStart').value,
-                rem: checks.rem,
-                kemudi: checks.kemudi,
-                rotator: checks.rotator,
-                radio: checks.radio,
-                apar: checks.apar,
-                seatbelt: checks.seatbelt,
-                ban: checks.ban,
-                lampu: checks.lampu,
-                spion: checks.spion,
-                klakson: checks.klakson,
-                oliRadiator: checks.oliRadiator,
-                minyakRem: checks.minyakRem,
-                kebocoran: checks.kebocoran,
-                bodyChassis: checks.bodyChassis,
-                p3k: checks.p3k,
-                statusKelayakan: currentStatus,
-                remarks: document.getElementById('remarks').value,
-                signature: 'Ttd: ' + driverName,
-                photoData: photoBase64 ? photoBase64 : "No Photo",
-                supervisorName: document.getElementById('supervisorName').value,
-                supervisorApproval: document.getElementById('supervisorApproval').value
-            };
-
-            fetch(APPS_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            })
-            .then(() => {
-                alert(`Laporan P2H Unit ${unitCode} + FOTO BERHASIL TERKIRIM ke Google Sheet!\nStatus: ${currentStatus}`);
-                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Kirim Laporan ke Google Sheet`;
-                submitBtn.disabled = false;
-            })
-            .catch(error => {
-                alert("Gagal mengirim data. Pastikan koneksi internet terhubung.");
-                console.error('Error:', error);
-                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Kirim Laporan ke Google Sheet`;
-                submitBtn.disabled = false;
-            });
-        }
-    </script>
+    window.addEventListener("online", () => {
+      updateNetworkAndQueueUI();
+      flushOfflineQueue(true);
+    });
+    window.addEventListener("offline", updateNetworkAndQueueUI);
+  </script>
 </body>
 </html>
