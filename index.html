@@ -163,7 +163,7 @@
     }
 
     /* =========================================================================
-       TOP DROPDOWN SELECTOR CARD (PERUSAHAAN ATAS, KENDARAAN BAWAH)
+       TOP DROPDOWN SELECTOR CARD
        ========================================================================= */
     .selector-panel {
       background: var(--card);
@@ -224,7 +224,7 @@
     }
 
     /* =========================================================================
-       NAVIGATION TABS (EQUAL-WIDTH PRECISION GRID)
+       NAVIGATION TABS
        ========================================================================= */
     .nav-tabs {
       display: grid;
@@ -526,6 +526,10 @@
       outline: none;
       border-color: var(--primary);
     }
+    .note-input.note-required {
+      border: 1.5px solid #dc2626;
+      background: #fff5f5;
+    }
 
     /* =========================================================================
        DIGITAL SIGNATURE PADS
@@ -652,7 +656,7 @@
     .kpi-val { font-size: 1.65rem; font-weight: 800; color: var(--text); margin-top: 4px; }
 
     /* =========================================================================
-       UPLOAD PROGRESS OVERLAY ANIMATION (DESKTOP & HANDPHONE)
+       UPLOAD PROGRESS OVERLAY ANIMATION
        ========================================================================= */
     .upload-overlay {
       position: fixed;
@@ -784,9 +788,7 @@
       color: #475569;
     }
 
-    @keyframes spin360 {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin360 { to { transform: rotate(360deg); } }
     @keyframes pulseRipple {
       0% { transform: scale(0.75); opacity: 0.9; }
       100% { transform: scale(1.38); opacity: 0; }
@@ -823,7 +825,7 @@
       transform: translateY(12px);
       pointer-events: none;
       transition: all 0.25s;
-      max-width: min(400px, calc(100vw - 32px));
+      max-width: min(420px, calc(100vw - 32px));
     }
     .toast.show { opacity: 1; transform: translateY(0); }
 
@@ -840,52 +842,18 @@
     }
 
     @media (max-width: 768px) {
-      .app-header {
-        padding: 12px 14px;
-      }
-      .header-inner {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-      }
-      .brand-box {
-        gap: 10px;
-      }
-      .logo-wrap {
-        height: 46px;
-        min-width: 106px;
-        padding: 4px 8px;
-      }
-      .logo-wrap img {
-        max-height: 36px;
-        max-width: 118px;
-      }
-      .brand-title h1 {
-        font-size: 1.02rem;
-      }
-      .brand-title p {
-        font-size: 0.74rem;
-      }
-      .sync-pill-area {
-        justify-content: space-between;
-        width: 100%;
-      }
-      .status-badge {
-        font-size: 0.73rem;
-        padding: 5px 10px;
-      }
-      .container {
-        margin: 12px auto;
-        padding: 0 10px;
-      }
-      .selector-panel, .card {
-        padding: 14px;
-        border-radius: 9px;
-      }
-      .legend-box, .grid-3, .grid-2 {
-        grid-template-columns: 1fr;
-      }
-      /* Prevent iOS auto-zoom on form inputs/selects */
+      .app-header { padding: 12px 14px; }
+      .header-inner { flex-direction: column; align-items: stretch; gap: 10px; }
+      .brand-box { gap: 10px; }
+      .logo-wrap { height: 46px; min-width: 106px; padding: 4px 8px; }
+      .logo-wrap img { max-height: 36px; max-width: 118px; }
+      .brand-title h1 { font-size: 1.02rem; }
+      .brand-title p { font-size: 0.74rem; }
+      .sync-pill-area { justify-content: space-between; width: 100%; }
+      .status-badge { font-size: 0.73rem; padding: 5px 10px; }
+      .container { margin: 12px auto; padding: 0 10px; }
+      .selector-panel, .card { padding: 14px; border-radius: 9px; }
+      .legend-box, .grid-3, .grid-2 { grid-template-columns: 1fr; }
       .custom-select,
       .field-group input,
       .field-group select,
@@ -894,9 +862,7 @@
       .sig-footer input {
         font-size: 16px !important;
       }
-      .sig-canvas-wrap {
-        height: 135px;
-      }
+      .sig-canvas-wrap { height: 135px; }
       .toast {
         left: 12px;
         right: 12px;
@@ -906,7 +872,7 @@
       }
     }
 
-    /* MOBILE CARD-TRANSFORM FOR CHECKLIST TABLE (ZERO HORIZONTAL SCROLL ON PHONE) */
+    /* MOBILE CARD-TRANSFORM FOR CHECKLIST TABLE */
     @media (max-width: 720px) {
       table.p2h-checklist-table,
       table.p2h-checklist-table thead,
@@ -916,9 +882,7 @@
         display: block;
         width: 100%;
       }
-      table.p2h-checklist-table thead {
-        display: none;
-      }
+      table.p2h-checklist-table thead { display: none; }
       table.p2h-checklist-table tr {
         padding: 12px;
         border-bottom: 1.5px solid #cbd5e1;
@@ -931,9 +895,7 @@
         gap: 8px 8px;
         align-items: center;
       }
-      table.p2h-checklist-table tbody tr:last-child {
-        border-bottom: none;
-      }
+      table.p2h-checklist-table tbody tr:last-child { border-bottom: none; }
       table.p2h-checklist-table td {
         padding: 0 !important;
         border: none !important;
@@ -976,53 +938,24 @@
         align-items: center;
         justify-content: center;
       }
-      table.p2h-checklist-table td.col-note {
-        grid-area: note;
-      }
-      table.p2h-checklist-table td.col-note .note-input {
-        min-height: 40px;
-      }
+      table.p2h-checklist-table td.col-note { grid-area: note; }
+      table.p2h-checklist-table td.col-note .note-input { min-height: 40px; }
     }
 
     @media (max-width: 640px) {
-      .grid-4, .grid-4.cols-3 {
-        grid-template-columns: 1fr;
-      }
-      .nav-tabs {
-        grid-template-columns: 1fr;
-        gap: 7px;
-      }
-      .tab-btn {
-        justify-content: space-between;
-        padding: 10px 14px;
-      }
-      .banner-actions {
-        width: 100%;
-      }
-      .banner-actions .btn {
-        flex: 1;
-      }
-      .form-submit-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .form-submit-bar .btn {
-        width: 100%;
-        min-height: 48px;
-        font-size: 0.92rem;
-      }
-      .toolbar-controls {
-        width: 100%;
-      }
-      .toolbar-controls > * {
-        flex: 1 1 auto;
-      }
+      .grid-4, .grid-4.cols-3 { grid-template-columns: 1fr; }
+      .nav-tabs { grid-template-columns: 1fr; gap: 7px; }
+      .tab-btn { justify-content: space-between; padding: 10px 14px; }
+      .banner-actions { width: 100%; }
+      .banner-actions .btn { flex: 1; }
+      .form-submit-bar { flex-direction: column; align-items: stretch; }
+      .form-submit-bar .btn { width: 100%; min-height: 48px; font-size: 0.92rem; }
+      .toolbar-controls { width: 100%; }
+      .toolbar-controls > * { flex: 1 1 auto; }
     }
 
     @media (max-width: 400px) {
-      .kpi-grid {
-        grid-template-columns: 1fr;
-      }
+      .kpi-grid { grid-template-columns: 1fr; }
     }
 
     /* =========================================================================
@@ -1094,13 +1027,12 @@
   </header>
 
   <main class="container">
-    <!-- TOP SELECTORS: PERUSAHAAN ATAS, JENIS KENDARAAN BAWAH (DROPDOWN) -->
+    <!-- TOP SELECTORS -->
     <section class="selector-panel">
       <div class="selector-stack">
-        <!-- ROW 1: PERUSAHAAN -->
         <div class="selector-row">
           <div class="selector-label">
-            <span>1. Nama Perusahaan/ Kontraktor>
+            <span>1. Pilih Perusahaan Kontraktor / Pemilik Unit</span>
             <span class="selector-tag" id="companyFullBadge">PT Sandai Persada Tambang</span>
           </div>
           <select id="companyDropdown" class="custom-select" onchange="onCompanyChange()">
@@ -1109,11 +1041,9 @@
             <option value="PT LPT">PT LPT — PT Labai Persada Tambang</option>
             <option value="PT BMI">PT BMI — PT Berseri Makmur Indonesia</option>
             <option value="PT UMUB">PT UMUB — PT Ultra Modern Untung Bersama</option>
-            <option value="PT SKP">PT SKP — PT Sambas Karya Perkasa</option>
           </select>
         </div>
 
-        <!-- ROW 2: JENIS KENDARAAN -->
         <div class="selector-row">
           <div class="selector-label">
             <span>2. Pilih Jenis Kendaraan / Alat Berat</span>
@@ -1131,7 +1061,7 @@
       </div>
     </section>
 
-    <!-- NAVIGATION TABS (3 TABS PRECISION EQUAL GRID) -->
+    <!-- NAVIGATION TABS -->
     <nav class="nav-tabs">
       <button class="tab-btn active" data-tab="tabForm" onclick="switchTab('tabForm')">
         <span>📋 Form Pemeriksaan P2H</span>
@@ -1205,11 +1135,11 @@
         <div class="grid-3" style="margin-bottom: 14px;">
           <div class="field-group">
             <label for="inpHmAwal">HM / KM Awal *</label>
-            <input type="number" step="0.1" inputmode="decimal" id="inpHmAwal" placeholder="0.0" oninput="calcTotalHm()" />
+            <input type="number" step="0.1" min="0" inputmode="decimal" id="inpHmAwal" placeholder="0.0" oninput="calcTotalHm()" />
           </div>
           <div class="field-group">
             <label for="inpHmAkhir">HM / KM Akhir</label>
-            <input type="number" step="0.1" inputmode="decimal" id="inpHmAkhir" placeholder="0.0" oninput="calcTotalHm()" />
+            <input type="number" step="0.1" min="0" inputmode="decimal" id="inpHmAkhir" placeholder="0.0" oninput="calcTotalHm()" />
           </div>
           <div class="field-group">
             <label for="inpTotalHm">Total HM / KM (Otomatis)</label>
@@ -1245,7 +1175,7 @@
         <!-- CHECKLIST SECTIONS CONTAINER -->
         <div id="checklistSectionsContainer"></div>
 
-        <!-- KERUSAKAN TAMBAHAN (5 BARIS SESUAI FORM) -->
+        <!-- KERUSAKAN TAMBAHAN -->
         <div class="section-card" id="extraDefectsCard">
           <div class="section-head">
             <span>*Jika ada kerusakan yang ditemukan dan tidak tercantum pada kolom di atas, silakan tulis di bawah ini:</span>
@@ -1259,7 +1189,7 @@
           </div>
         </div>
 
-        <!-- DIGITAL SIGNATURES (DYNAMIC 2-COLUMN OR 3-COLUMN FOR LV) -->
+        <!-- DIGITAL SIGNATURES -->
         <div class="section-card">
           <div class="section-head">
             <span>Pengesahan &amp; Tanda Tangan Digital</span>
@@ -1375,7 +1305,6 @@
         <div class="pulse-ring"></div>
         <div class="pulse-ring delay"></div>
         <div class="upload-circle-core" id="uploadIconCore">
-          <!-- Cloud Upload Icon (Active State) -->
           <svg id="svgUploadingIcon" class="cloud-arrow-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
             <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
             <g class="arrow-up-anim">
@@ -1383,7 +1312,6 @@
               <path d="m9 12 3-3 3 3"/>
             </g>
           </svg>
-          <!-- Checkmark Icon (Success State) -->
           <svg id="svgSuccessIcon" class="cloud-arrow-svg check-pop-anim" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 6 9 17l-5-5"/>
           </svg>
@@ -1409,12 +1337,12 @@
 
   <script>
     /* =========================================================================
-       0. EMBEDDED GOOGLE APPS SCRIPT WEB APP ENDPOINT (1-ARAH PRESISI 57 KOLOM)
+       0. EMBEDDED GOOGLE APPS SCRIPT WEB APP ENDPOINT
        ========================================================================= */
     const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyAvBQaKL_Cn814-L36naZB84ZyAfKtOgUMUq7L5RfYVhK0z4UAIfDcndHt9Bhf0kxk/exec";
 
     /* =========================================================================
-       1. MASTER DATA PERUSAHAAN & 6 FORM P2H SESUAI DOKUMEN RESMI
+       1. MASTER DATA PERUSAHAAN & 6 FORM P2H RESMI
        ========================================================================= */
     const COMPANIES = {
       "PT SPT":  { code: "PT SPT",  full: "PT Sandai Persada Tambang" },
@@ -1828,7 +1756,8 @@
       checklistValues: {},
       sigPads: [],
       isUploading: false,
-      logoStatus: "CHECKING"
+      logoStatus: "CHECKING",
+      lastWindowWidth: window.innerWidth
     };
 
     function loadJson(key, fallback) {
@@ -1844,7 +1773,16 @@
       try {
         localStorage.setItem(key, JSON.stringify(data));
       } catch (e) {
-        showToast("⚠️ Penyimpanan browser penuh. Export CSV disarankan.");
+        // Jika storage penuh akibat arsip lama, pangkas arsip terlama otomatis
+        if (key === STORAGE_KEYS.P2H && Array.isArray(data) && data.length > 25) {
+          const trimmed = data.slice(0, 25);
+          try {
+            localStorage.setItem(key, JSON.stringify(trimmed));
+            showToast("ℹ️ Arsip lama dipangkas otomatis agar memori perangkat tetap lega.");
+            return;
+          } catch (_) {}
+        }
+        showToast("⚠️ Penyimpanan browser hampir penuh. Disarankan Export CSV.");
       }
     }
 
@@ -1853,11 +1791,11 @@
       el.textContent = msg;
       el.classList.add("show");
       clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(() => el.classList.remove("show"), 3800);
+      window._toastTimer = setTimeout(() => el.classList.remove("show"), 4000);
     }
 
     /* =========================================================================
-       3. UPLOAD ANIMATION CONTROLLER (OVERLAY + HEADER SYNC INDICATOR)
+       3. UPLOAD ANIMATION CONTROLLER
        ========================================================================= */
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
@@ -1931,7 +1869,7 @@
     }
 
     /* =========================================================================
-       4. LOGO FALLBACK CHAIN (GOOGLE DRIVE ONLINE -> THUMBNAIL -> SVG VECTOR)
+       4. LOGO FALLBACK CHAIN
        ========================================================================= */
     let logoAttempt = 0;
     function handleLogoLoad() {
@@ -1987,7 +1925,6 @@
       document.getElementById("grpNik").style.display = isLv ? "flex" : "none";
       document.getElementById("grpKegiatan").style.display = isLv ? "flex" : "none";
 
-      // Ensure 3-column precision on desktop when NIK & Kegiatan are hidden for Heavy Equipment
       document.getElementById("identityRow1").classList.toggle("cols-3", !isLv);
       document.getElementById("identityRow2").classList.toggle("cols-3", !isLv);
 
@@ -1996,14 +1933,14 @@
         legendEl.innerHTML = `
           <strong>Keterangan Kondisi (Light Vehicle):</strong><br/>
           • <strong>NORMAL</strong> = Kondisi Baik / Layak Operasi<br/>
-          • <strong>TIDAK NORMAL</strong> = Kondisi Rusak / Perlu Perbaikan (Isi Catatan)
+          • <strong>TIDAK NORMAL</strong> = Kondisi Rusak / Perlu Perbaikan (Wajib Isi Catatan)
         `;
       } else {
         legendEl.innerHTML = `
           <strong>Keterangan Kondisi (${state.vehicle}):</strong><br/>
           • <strong>B</strong> = Kondisi Baik / Normal<br/>
-          • <strong>KB</strong> = Kondisi Kurang Baik<br/>
-          • <strong>R</strong> = Kondisi Rusak / Tidak Normal
+          • <strong>KB</strong> = Kondisi Kurang Baik (Wajib Isi Catatan)<br/>
+          • <strong>R</strong> = Kondisi Rusak / Tidak Normal (Wajib Isi Catatan)
         `;
       }
 
@@ -2018,6 +1955,7 @@
         sec.items.forEach(item => {
           const key = `${sec.code}-${item.no}`;
           const saved = state.checklistValues[key] || { val: "", note: "" };
+          const isDamaged = saved.val === "R" || saved.val === "TIDAK_NORMAL" || saved.val === "KB";
 
           let rowClass = "";
           if (saved.val === "R" || saved.val === "TIDAK_NORMAL") {
@@ -2037,6 +1975,8 @@
                 <button type="button" class="cond-btn ${saved.val === 'R' ? 'sel-R' : ''}" onclick="setItemCond('${key}', 'R')">R</button>
                </div>`;
 
+          const noteRequiredClass = (isDamaged && !saved.note.trim()) ? "note-required" : "";
+
           rowsHtml += `
             <tr id="row-${key}" class="${rowClass}">
               <td class="col-no" style="width:46px; font-weight:700; text-align:center;">${item.no}</td>
@@ -2046,7 +1986,8 @@
               </td>
               <td class="col-cond" style="width:205px;">${buttonsHtml}</td>
               <td class="col-note">
-                <input type="text" class="note-input" placeholder="${isLv ? 'Catatan temuan...' : 'Keterangan jika KB / R...'}"
+                <input type="text" id="note-${key}" class="note-input ${noteRequiredClass}"
+                  placeholder="${isDamaged ? 'WAJIB isi detail kerusakan di sini...' : (isLv ? 'Catatan temuan (opsional)...' : 'Keterangan jika KB / R...')}"
                   value="${escapeHtml(saved.note)}"
                   oninput="setItemNote('${key}', this.value)" />
               </td>
@@ -2081,7 +2022,6 @@
         `<strong>Catatan Penting SOP P2H SPT Group:</strong><br/>` + tpl.sopNotes.join("<br/>");
 
       evaluateHazards();
-      renderSignatures();
     }
 
     function setItemCond(key, val) {
@@ -2093,6 +2033,13 @@
     function setItemNote(key, note) {
       if (!state.checklistValues[key]) state.checklistValues[key] = { val: "", note: "" };
       state.checklistValues[key].note = note;
+      const inp = document.getElementById(`note-${key}`);
+      if (inp) {
+        const val = state.checklistValues[key].val;
+        const isDamaged = val === "R" || val === "TIDAK_NORMAL" || val === "KB";
+        inp.classList.toggle("note-required", isDamaged && !note.trim());
+      }
+      evaluateHazards();
     }
 
     function markAllGood() {
@@ -2119,7 +2066,10 @@
       document.getElementById("inpHmAwal").value = "";
       document.getElementById("inpHmAkhir").value = "";
       document.getElementById("inpTotalHm").value = "0.0";
+      document.getElementById("inpTotalHm").style.color = "#0f2942";
       document.querySelectorAll(".extra-defect").forEach(el => el.value = "");
+      state.sigPads.forEach(p => p && p.clear());
+      document.querySelectorAll("[id^='sigName-']").forEach(el => el.value = "");
       renderFormStructure();
       showToast("↺ Form P2H telah direset.");
     }
@@ -2175,14 +2125,13 @@
     }
 
     /* =========================================================================
-       6. HIGH-DPI DIGITAL SIGNATURE PADS (RESPONSIVE + ORIENTATION SAFE)
+       6. HIGH-DPI DIGITAL SIGNATURE PADS (MOBILE KEYBOARD-SAFE)
        ========================================================================= */
     function renderSignatures() {
       const tpl = P2H_TEMPLATES[state.vehicle];
       const container = document.getElementById("signaturesContainer");
       const colsClass = tpl.sigRoles.length === 3 ? "grid-3" : "grid-2";
 
-      // Preserve existing names & strokes before re-rendering
       const prevNames = tpl.sigRoles.map((_, idx) => document.getElementById(`sigName-${idx}`)?.value || "");
       const prevStrokes = tpl.sigRoles.map((_, idx) =>
         state.sigPads[idx]?.hasStroke() ? state.sigPads[idx].canvas.toDataURL("image/png") : ""
@@ -2215,7 +2164,7 @@
 
     function initSingleCanvas(canvas, idx, restoreDataUrl = "") {
       const ctx = canvas.getContext("2d");
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const rect = canvas.getBoundingClientRect();
       const cssW = Math.max(220, rect.width);
       const cssH = Math.max(120, rect.height);
@@ -2287,7 +2236,7 @@
     }
 
     /* =========================================================================
-       7. SUBMIT P2H, AUTO WORK ORDER, & ANIMATED 1-WAY UPLOAD ENGINE
+       7. SUBMIT P2H, VALIDASI KETAT, AUTO WORK ORDER & UPLOAD ENGINE
        ========================================================================= */
     async function submitP2HForm() {
       if (state.isUploading) return;
@@ -2300,8 +2249,8 @@
       const noUnit = document.getElementById("inpNoUnit").value.trim().toUpperCase();
       const nik = document.getElementById("inpNik").value.trim();
       const kegiatan = document.getElementById("inpKegiatan").value.trim();
-      const hmAwal = document.getElementById("inpHmAwal").value;
-      const hmAkhir = document.getElementById("inpHmAkhir").value;
+      const hmAwalRaw = document.getElementById("inpHmAwal").value;
+      const hmAkhirRaw = document.getElementById("inpHmAkhir").value;
       const totalHm = document.getElementById("inpTotalHm").value;
 
       if (!nama || !tanggal || !noUnit) {
@@ -2309,8 +2258,21 @@
         return;
       }
 
+      if (hmAwalRaw === "" || isNaN(parseFloat(hmAwalRaw))) {
+        showToast("⚠️ Mohon isi angka HM / KM Awal unit!");
+        document.getElementById("inpHmAwal").focus();
+        return;
+      }
+
+      if (hmAkhirRaw !== "" && parseFloat(hmAkhirRaw) < parseFloat(hmAwalRaw)) {
+        showToast("⚠️ Kesalahan input: HM / KM Akhir tidak boleh lebih kecil dari HM / KM Awal!");
+        document.getElementById("inpHmAkhir").focus();
+        return;
+      }
+
       const tpl = P2H_TEMPLATES[state.vehicle];
       let uncheckedCount = 0;
+      let missingNoteItem = null;
       const itemsDetail = [];
 
       tpl.sections.forEach(sec => {
@@ -2320,6 +2282,10 @@
           if (!entry || !entry.val) {
             uncheckedCount++;
           } else {
+            const isDamaged = entry.val === "R" || entry.val === "TIDAK_NORMAL" || entry.val === "KB";
+            if (isDamaged && !entry.note.trim() && !missingNoteItem) {
+              missingNoteItem = { key, label: `[${sec.code}.${item.no}] ${item.name}` };
+            }
             itemsDetail.push({
               section: sec.code,
               sectionTitle: sec.title,
@@ -2327,7 +2293,7 @@
               item: item.name,
               hazard: item.hazard,
               condition: entry.val,
-              note: entry.note || ""
+              note: entry.note.trim()
             });
           }
         });
@@ -2335,6 +2301,22 @@
 
       if (uncheckedCount > 0) {
         showToast(`⚠️ Masih ada ${uncheckedCount} item pemeriksaan yang belum dipilih kondisinya!`);
+        return;
+      }
+
+      if (missingNoteItem) {
+        showToast(`⚠️ Mohon isi catatan keterangan kerusakan pada item ${missingNoteItem.label}!`);
+        const noteEl = document.getElementById(`note-${missingNoteItem.key}`);
+        if (noteEl) {
+          noteEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          noteEl.focus();
+        }
+        return;
+      }
+
+      if (!state.sigPads[0]?.hasStroke()) {
+        showToast("⚠️ Mohon bubuhkan tanda tangan digital Driver / Operator terlebih dahulu!");
+        document.getElementById("signaturesContainer").scrollIntoView({ behavior: "smooth", block: "center" });
         return;
       }
 
@@ -2375,8 +2357,8 @@
         typeUnit: typeUnit || "-",
         noUnit,
         kegiatan: kegiatan || "-",
-        hmAwal: hmAwal || "0",
-        hmAkhir: hmAkhir || "0",
+        hmAwal: hmAwalRaw || "0",
+        hmAkhir: hmAkhirRaw || "0",
         totalHm,
         unitStatus,
         totalItems: itemsDetail.length,
@@ -2733,7 +2715,7 @@
         hmAkhir: document.getElementById("inpHmAkhir").value || "........",
         totalHm: document.getElementById("inpTotalHm").value || "........",
         itemsDetail,
-        extraDefects: Array.from(document.querySelectorAll(".extra-defect")).map(el => el.value.trim()),
+        extraDefects: Array.from(document.querySelectorAll(".extra-defect")).map(el => el.value.trim()).filter(Boolean),
         signatures: tpl.sigRoles.map((role, idx) => ({
           role,
           name: document.getElementById(`sigName-${idx}`)?.value || "........................",
@@ -2785,6 +2767,23 @@
           </table>
         `;
       });
+
+      const extras = (rec.extraDefects || []).filter(Boolean);
+      const extraTableHtml = `
+        <table>
+          <thead>
+            <tr>
+              <th>*Catatan Kerusakan Tambahan (Di Luar Daftar Tabel Pemeriksaan):</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${extras.length > 0
+              ? extras.map((ex, i) => `<tr><td>${i + 1}. ${escapeHtml(ex)}</td></tr>`).join("")
+              : `<tr><td style="color:#666;">- Tidak ada temuan kerusakan tambahan -</td></tr>`
+            }
+          </tbody>
+        </table>
+      `;
 
       const sigHtml = `
         <table>
@@ -2839,6 +2838,7 @@
           </table>
 
           ${tablesHtml}
+          ${extraTableHtml}
           ${sigHtml}
           <div style="font-size:8pt; margin-top:4px;">
             ${tpl.sopNotes.map(n => `<div>${escapeHtml(n)}</div>`).join("")}
@@ -2885,7 +2885,7 @@
 
     function downloadCsv(filename, headers, rows) {
       const csvLines = [headers.join(","), ...rows.map(r => r.map(v => `"${String(v ?? "").replace(/"/g, '""')}"`).join(","))];
-      const blob = new Blob([csvLines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const blob = new Blob(["\uFEFF" + csvLines.join("\n")], { type: "text/csv;charset=utf-8;" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
       a.download = filename;
@@ -2951,8 +2951,9 @@
        9. INITIALIZATION & RESPONSIVE RESIZE HANDLER
        ========================================================================= */
     window.addEventListener("DOMContentLoaded", () => {
-      const today = new Date().toISOString().split("T")[0];
-      document.getElementById("inpTanggal").value = today;
+      const now = new Date();
+      const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().split("T")[0];
+      document.getElementById("inpTanggal").value = localDate;
 
       onCompanyChange();
       renderFormStructure();
@@ -2965,6 +2966,10 @@
 
     let _resizeSigTimer = null;
     window.addEventListener("resize", () => {
+      // Hanya render ulang canvas jika lebar layar berubah (mencegah terhapus saat keyboard HP muncul)
+      if (window.innerWidth === state.lastWindowWidth) return;
+      state.lastWindowWidth = window.innerWidth;
+
       clearTimeout(_resizeSigTimer);
       _resizeSigTimer = setTimeout(() => {
         if (document.getElementById("tabForm").classList.contains("active")) {
